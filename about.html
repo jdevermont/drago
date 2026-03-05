@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About DRAGO - Global Leader Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --drago-teal: #5B7B7A;
+            --drago-teal-dark: #4A6B6B;
+            --drago-cream: #F5F5F0;
+            --drago-white: #FFFFFF;
+            --drago-text: #2D3748;
+            --drago-text-light: #718096;
+            --drago-accent: #C9A962;
+            --drago-light-teal: #E8EEEE;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--drago-cream);
+            color: var(--drago-text);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: var(--drago-teal);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: var(--drago-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: white;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.9;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .nav-link:hover {
+            opacity: 1;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--drago-teal-dark);
+            margin-bottom: 2rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .section h2 {
+            font-size: 1.4rem;
+            color: var(--drago-teal-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+            color: var(--drago-text);
+        }
+
+        .section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: var(--drago-teal);
+            font-weight: 600;
+        }
+
+        .contact-info {
+            background: var(--drago-light-teal);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .contact-info a {
+            color: var(--drago-teal);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--drago-teal);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .credit {
+            text-align: center;
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--drago-text-light);
+            margin-top: 2rem;
+        }
+
+        .credit a {
+            color: var(--drago-teal);
+            text-decoration: none;
+        }
+
+        .credit a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a class="logo" href="drago-platform.html">DRAGO</a>
+            <nav class="header-nav">
+                <a class="nav-link" href="drago-platform.html">Home</a>
+                <span class="nav-link" onclick="requestProfile()">Request</span>
+                <a class="nav-link" href="about.html">About</a>
+                <div class="user-menu" onclick="window.location.href='drago-platform.html'">
+                    <div class="user-avatar">J</div>
+                    <span>Sign Out</span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <a href="drago-platform.html" class="back-link">← Back to Directory</a>
+
+        <h1 class="page-title">About Drago</h1>
+
+        <div class="section">
+            <h2>Our Mission</h2>
+            <p>Drago combines <span class="highlight">elite intelligence tradecraft</span>, <span class="highlight">deep substantive expertise</span>, and <span class="highlight">artificial intelligence</span> to deliver tailored and timely leadership profiles for C-suite clients.</p>
+            <p>We provide comprehensive intelligence on global leaders, enabling our clients to make informed decisions and build meaningful relationships with key decision-makers around the world.</p>
+        </div>
+
+        <div class="section">
+            <h2>What We Offer</h2>
+            <p>Our leadership profiles go beyond publicly available information. Each profile includes:</p>
+            <p>• <strong>Strategic Insights</strong> — Why each leader matters to your business objectives</p>
+            <p>• <strong>Meeting Preparation</strong> — Guidance on how to effectively engage with each leader</p>
+            <p>• <strong>Current Priorities</strong> — What's on their mind right now</p>
+            <p>• <strong>Network Analysis</strong> — Key relationships and influence dynamics</p>
+            <p>• <strong>Background Intelligence</strong> — Career history, controversies, and personal context</p>
+        </div>
+
+        <div class="section">
+            <h2>Contact Us</h2>
+            <p>Interested in learning more about our services or requesting a custom profile?</p>
+            <div class="contact-info">
+                <p><strong>Email:</strong> <a href="mailto:j.devermont@kupanda.com">j.devermont@kupanda.com</a></p>
+                <p><strong>Website:</strong> <a href="https://www.kupandacapital.com" target="_blank">www.kupandacapital.com</a></p>
+            </div>
+        </div>
+
+        <p class="credit">Drago Intelligence is a <a href="https://www.kupandacapital.com" target="_blank">Kupanda Capital</a> project.</p>
+    </main>
+
+    <script>
+        function requestProfile() {
+            const subject = encodeURIComponent('Profile Request');
+            const body = encodeURIComponent(`We request a profile of [leader's name], [leader's title] by [date].`);
+            window.location.href = `mailto:j.devermont@kupanda.com?subject=${subject}&body=${body}`;
+        }
+    </script>
+</body>
+</html>
