@@ -2,7 +2,7 @@
   "name": "DRAGO Intelligence",
   "short_name": "DRAGO",
   "description": "Global Leader Intelligence Platform",
-  "start_url": "/drago-platform.html",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#5B7B7A",
   "theme_color": "#5B7B7A",
