@@ -1,7 +1,7 @@
-const CACHE_NAME = 'drago-v1';
+const CACHE_NAME = 'drago-v2';
 const urlsToCache = [
   '/',
-  '/drago-platform.html',
+  '/index.html',
   '/about.html',
   '/manifest.json',
   '/images/drago-logo.png',
@@ -19,35 +19,33 @@ self.addEventListener('install', event => {
         return cache.addAll(urlsToCache);
       })
   );
+  // Activate new service worker immediately
+  self.skipWaiting();
 });
 
-// Fetch from cache, falling back to network
+// Network-first strategy: try network, fall back to cache
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request)
+    fetch(event.request)
       .then(response => {
-        // Return cached version or fetch from network
-        if (response) {
-          return response;
-        }
-        return fetch(event.request).then(response => {
-          // Don't cache non-successful responses
-          if (!response || response.status !== 200 || response.type !== 'basic') {
-            return response;
-          }
-          // Clone and cache the response
+        // Cache successful responses for offline fallback
+        if (response && response.status === 200 && response.type === 'basic') {
           const responseToCache = response.clone();
           caches.open(CACHE_NAME)
             .then(cache => {
               cache.put(event.request, responseToCache);
             });
-          return response;
-        });
+        }
+        return response;
+      })
+      .catch(() => {
+        // Network failed, try cache
+        return caches.match(event.request);
       })
   );
 });
 
-// Clean up old caches
+// Clean up old caches and take control immediately
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
@@ -58,6 +56,9 @@ self.addEventListener('activate', event => {
           }
         })
       );
+    }).then(() => {
+      // Take control of all pages immediately
+      return self.clients.claim();
     })
   );
 });
