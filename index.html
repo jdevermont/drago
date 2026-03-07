@@ -4456,30 +4456,25 @@
         }
 
         function downloadPDF(leaderId) {
-            const pdfFiles = {
-                'massano': 'drago-massano.pdf',
-                'gruner': 'drago-gruner.pdf',
-                'yaron': 'drago-yaron.pdf',
-                'tokayev': 'drago-tokayev.pdf',
-                'joho': 'drago-joho.pdf',
-                'matlanyane': 'drago-matlanyane.pdf',
-                'albino': 'drago-albino.pdf',
-                'edun': 'drago-edun.pdf',
-                'tinubu': 'drago-tinubu.pdf',
-                'arakwiye': 'drago-arakwiye.pdf',
-                'ingabire': 'drago-ingabire.pdf',
-                'ndabamenye': 'drago-ndabamenye.pdf',
-                'rusagara': 'drago-rusagara.pdf',
-                'mene': 'drago-mene.pdf',
-                'ramaphosa': 'drago-ramaphosa.pdf'
-            };
+            const domain = getEmailDomain(currentUser);
+            const domainKey = domain.replace('.com', '').replace('.org', '').replace('.net', '');
 
-            const pdfFile = pdfFiles[leaderId];
-            if (pdfFile) {
-                window.open(pdfFile, '_blank');
-            } else {
-                alert('PDF not available for this leader.');
-            }
+            // Try domain-specific PDF first, fall back to standard
+            const domainPdf = `drago-${leaderId}-${domainKey}.pdf`;
+            const standardPdf = `drago-${leaderId}-standard.pdf`;
+
+            // Check if domain-specific PDF exists
+            fetch(domainPdf, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        window.open(domainPdf, '_blank');
+                    } else {
+                        window.open(standardPdf, '_blank');
+                    }
+                })
+                .catch(() => {
+                    window.open(standardPdf, '_blank');
+                });
         }
 
         function requestProfile() {
