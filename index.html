@@ -195,6 +195,72 @@
             margin-top: 0.5rem;
         }
 
+        /* iOS Share Guide */
+        .ios-share-guide {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 1.25rem;
+            padding-bottom: calc(1.25rem + env(safe-area-inset-bottom));
+            text-align: center;
+            z-index: 9999;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            animation: slideUp 0.3s ease;
+        }
+
+        .ios-share-guide.active {
+            display: block;
+        }
+
+        .ios-share-guide .share-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin: 0 0.25rem;
+        }
+
+        .ios-share-guide .guide-dismiss {
+            display: block;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.75rem;
+            cursor: pointer;
+            margin-top: 0.75rem;
+        }
+
+        .ios-share-arrow {
+            position: fixed;
+            bottom: calc(4.5rem + env(safe-area-inset-bottom));
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.5rem;
+            z-index: 10000;
+            animation: bounce 1s ease infinite;
+            display: none;
+        }
+
+        .ios-share-arrow.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
         /* Splash Screen */
         .splash-screen {
             position: fixed;
@@ -4955,6 +5021,13 @@
         }
     </script>
 
+    <!-- iOS Share Guide -->
+    <div class="ios-share-guide" id="iosShareGuide">
+        <p>Tap the <svg class="share-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> button below, then <strong>"Add to Home Screen"</strong></p>
+        <button class="guide-dismiss" onclick="document.getElementById('iosShareGuide').classList.remove('active'); document.getElementById('iosShareArrow').classList.remove('active');">Dismiss</button>
+    </div>
+    <div class="ios-share-arrow" id="iosShareArrow">↓</div>
+
     <!-- PWA Install Prompt & Splash Screen -->
     <script>
         // Splash screen (only in standalone/PWA mode)
@@ -4981,14 +5054,16 @@
 
         document.getElementById('installBtn').addEventListener('click', () => {
             if (deferredPrompt) {
+                // Android/Chrome - triggers native install dialog
                 deferredPrompt.prompt();
                 deferredPrompt.userChoice.then((choice) => {
                     deferredPrompt = null;
                     document.getElementById('installPrompt').style.display = 'none';
                 });
             } else {
-                // iOS Safari - show manual instructions
-                alert('To install: tap the Share button (square with arrow) at the bottom of Safari, then tap "Add to Home Screen"');
+                // iOS Safari - show visual guide pointing to Share button
+                document.getElementById('iosShareGuide').classList.add('active');
+                document.getElementById('iosShareArrow').classList.add('active');
             }
         });
 
