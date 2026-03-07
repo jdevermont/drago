@@ -1682,6 +1682,10 @@
             display: none !important;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function() { emailjs.init('hz0IlrdJ26grlScUm'); })();
+    </script>
 </head>
 <body>
 
@@ -4523,26 +4527,21 @@
             };
             const requestTime = now.toLocaleString('en-US', estOptions) + ' EST';
 
-            // Build email
-            const subject = encodeURIComponent('DRAGO PROFILE REQUEST');
-            const body = encodeURIComponent(
-`DRAGO Profile Request
-
-Requested by: ${currentUser}
-Request submitted: ${requestTime}
-
-PROFILE DETAILS
-Leader: ${leader}
-Position: ${position}
-Due Date: ${dueDateFormatted}
-`);
-
-            // Open email client
-            window.location.href = `mailto:j.devermont@kupanda.com?subject=${subject}&body=${body}`;
-
-            // Show success message
-            document.getElementById('requestForm').style.display = 'none';
-            document.getElementById('requestSuccess').style.display = 'block';
+            // Send via EmailJS
+            emailjs.send('service_5poo91b', 'template_1m5ryo5', {
+                from_email: currentUser,
+                request_time: requestTime,
+                leader: leader,
+                position: position,
+                due_date: dueDateFormatted
+            }).then(function() {
+                // Show success message
+                document.getElementById('requestForm').style.display = 'none';
+                document.getElementById('requestSuccess').style.display = 'block';
+            }, function(error) {
+                alert('Failed to send request. Please try again.');
+                console.error('EmailJS error:', error);
+            });
         });
 
         // Close modal when clicking outside
