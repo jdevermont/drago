@@ -3780,7 +3780,7 @@
             // 'all' = full access, { country: 'xxx' } = all profiles for that country, array = specific leader IDs
             'kupanda.com': 'all',
             'citi.com': ['ramaphosa', 'mene', 'yaron', 'edun', 'tokayev'],
-            'oathafrica.com': { country: 'rwanda' }
+            'oathafrica.com': { country: 'rwanda', positions: ['agriculture-minister'] }
         };
 
         let currentUser = null;
@@ -3799,8 +3799,12 @@
             if (allowedLeaders === 'all') {
                 return leaders;
             }
-            if (allowedLeaders && allowedLeaders.country) {
-                return leaders.filter(leader => leader.countryCode === allowedLeaders.country);
+            if (allowedLeaders && (allowedLeaders.country || allowedLeaders.positions)) {
+                return leaders.filter(leader => {
+                    if (allowedLeaders.country && leader.countryCode === allowedLeaders.country) return true;
+                    if (allowedLeaders.positions && allowedLeaders.positions.includes(leader.position)) return true;
+                    return false;
+                });
             }
             return leaders.filter(leader => allowedLeaders.includes(leader.id));
         }
