@@ -1512,10 +1512,61 @@
 
         /* PWA Standalone Mode */
         @media (display-mode: standalone) {
+            /* Hide hero/credit and filter dropdowns */
+            .directory-view > .hero {
+                display: none;
+            }
+
+            .filter-group {
+                display: none;
+            }
+
+            /* Hide map globe icon */
+            .filter-globe {
+                display: none;
+            }
+
+            /* Make search bar full width without filter bar chrome */
+            .filters {
+                background: transparent;
+                border-bottom: none;
+                padding: 1rem 1.5rem 0.5rem;
+                position: static;
+            }
+
+            .filters-content {
+                flex-direction: column;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .search-box .filter-label {
+                display: none;
+            }
+
+            /* Simplify header nav */
+            .header-nav .nav-link[href="about.html"],
+            .header-nav span.nav-link:first-child {
+                display: none;
+            }
+
+            .header {
+                padding: 0.75rem 1.5rem;
+                padding-top: calc(0.75rem + env(safe-area-inset-top));
+            }
+
+            /* Bigger, easier to tap back button */
             .back-btn {
                 font-size: 1rem;
                 padding: 0.5rem 0;
                 margin-bottom: 1.25rem;
+            }
+
+            /* Tighten up the leaders section */
+            .section-header {
+                padding: 0.75rem 0;
             }
         }
 
