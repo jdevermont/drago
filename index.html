@@ -2095,6 +2095,7 @@
             type: 'youtube',
             url: 'https://youtu.be/i4_InztVsUs?t=199',
             embedId: 'i4_InztVsUs',
+            startTime: 0,
             title: 'Gruner Interview'
             }
             },
@@ -2218,6 +2219,7 @@
             type: 'youtube',
             url: 'https://www.youtube.com/watch?v=BSE048gT6aA',
             embedId: 'BSE048gT6aA',
+            startTime: 0,
             title: 'Yaron Interview'
             }
             },
@@ -2340,6 +2342,7 @@
             type: 'youtube',
             url: 'https://youtu.be/oSM3aFyyuN0?t=97',
             embedId: 'oSM3aFyyuN0',
+            startTime: 97,
             title: 'Tokayev Interview'
             }
             },
@@ -2466,6 +2469,7 @@
                     type: 'youtube',
                     url: 'https://www.youtube.com/watch?v=inSrOHE2R2Y&t=341',
                     embedId: 'inSrOHE2R2Y',
+                    startTime: 341,
                     title: 'Joho Interview'
                 }
             },
@@ -2586,6 +2590,7 @@
             type: 'youtube',
             url: 'https://www.youtube.com/watch?v=dl80c4wkm8k',
             embedId: 'dl80c4wkm8k',
+            startTime: 0,
             title: 'Matlanyane at Climate Summit'
             }
             },
@@ -2706,6 +2711,7 @@
             type: 'youtube',
             url: 'https://youtu.be/OOnapVuzBfA?t=280',
             embedId: 'OOnapVuzBfA',
+            startTime: 280,
             title: 'Albino Interview'
             }
             },
@@ -2830,6 +2836,7 @@
             type: 'youtube',
             url: 'https://youtu.be/8xQCvKSQ20U?t=96',
             embedId: '8xQCvKSQ20U',
+            startTime: 96,
             title: 'Edun Interview'
             }
             },
@@ -3077,7 +3084,8 @@
             type: 'youtube',
             title: 'Minister Arakwiye on Rwanda\'s Environmental Vision',
             url: 'https://www.youtube.com/watch?v=WliN8908DgM',
-            embedId: 'WliN8908DgM'
+            embedId: 'WliN8908DgM',
+            startTime: 0
             }
             },
             onTheirMind: [
@@ -3315,7 +3323,8 @@
             type: 'youtube',
             title: 'Minister Ndabamenye on Rwanda\'s Agricultural Vision',
             url: 'https://www.youtube.com/watch?v=rMh0nz8Qf_k',
-            embedId: 'rMh0nz8Qf_k'
+            embedId: 'rMh0nz8Qf_k',
+            startTime: 0
             }
             },
             onTheirMind: [
@@ -3437,6 +3446,7 @@
             type: 'youtube',
             url: 'https://www.youtube.com/watch?v=eVV-KjVpt7s',
             embedId: 'eVV-KjVpt7s',
+            startTime: 0,
             title: 'Rusagara Interview'
             }
             },
@@ -3561,6 +3571,7 @@
             type: 'youtube',
             url: 'https://youtu.be/wTTbUaRsagg?t=445',
             embedId: 'wTTbUaRsagg',
+            startTime: 445,
             title: 'Mene Interview'
             }
             },
@@ -3685,6 +3696,7 @@
             type: 'youtube',
             url: 'https://www.youtube.com/watch?v=o6MZLnCXvEE',
             embedId: 'o6MZLnCXvEE',
+            startTime: 0,
             title: 'Ramaphosa Interview'
             }
             },
@@ -3941,6 +3953,7 @@
 
         // Show profile
         function showProfile(leaderId) {
+            stopAllVideos();
             // Check if user has access to this leader
             const accessibleLeaders = getAccessibleLeaders();
             const hasAccess = accessibleLeaders.some(l => l.id === leaderId);
@@ -4046,7 +4059,7 @@
                                     ${leader.meetingWithThem.video.type === 'youtube' ? `
                                         <div class="video-iframe-wrapper">
                                             <iframe
-                                                src="https://www.youtube.com/embed/${leader.meetingWithThem.video.embedId}"
+                                                src="https://www.youtube.com/embed/${leader.meetingWithThem.video.embedId}?start=${leader.meetingWithThem.video.startTime || 0}&enablejsapi=1"
                                                 title="${leader.meetingWithThem.video.title}"
                                                 frameborder="0"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -4168,7 +4181,14 @@
             // Reload Twitter widgets if present
         }
 
+        function stopAllVideos() {
+            document.querySelectorAll('.video-iframe-wrapper iframe').forEach(iframe => {
+                iframe.src = '';
+            });
+        }
+
         function showDirectory() {
+            stopAllVideos();
             document.getElementById('directoryView').style.display = 'block';
             document.getElementById('profileView').style.display = 'none';
             document.getElementById('alertsView').style.display = 'none';
@@ -4176,6 +4196,7 @@
         }
 
         function showAlerts() {
+            stopAllVideos();
             document.getElementById('directoryView').style.display = 'none';
             document.getElementById('profileView').style.display = 'none';
             document.getElementById('alertsView').style.display = 'block';
