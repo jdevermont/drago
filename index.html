@@ -87,6 +87,7 @@
         .login-screen {
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, var(--drago-teal) 0%, var(--drago-teal-dark) 100%);
@@ -162,44 +163,36 @@
         /* Install Prompt */
         .install-prompt {
             display: none;
-            margin-top: 1.5rem;
-            padding: 1rem 1.25rem;
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 10px;
+            margin-bottom: 1.25rem;
             text-align: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .install-prompt p {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.85rem;
-            margin-bottom: 0.75rem;
         }
 
         .install-btn {
-            background: white;
-            color: var(--drago-teal-dark);
-            border: none;
+            background: none;
+            color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             padding: 0.6rem 1.5rem;
             border-radius: 8px;
             font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
-            transition: opacity 0.3s;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
         }
 
         .install-btn:hover {
-            opacity: 0.9;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.6);
         }
 
         .install-dismiss {
+            display: block;
             background: none;
             border: none;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 0.7rem;
             cursor: pointer;
-            margin-left: 0.75rem;
+            margin-top: 0.5rem;
         }
 
         /* Splash Screen */
@@ -1905,6 +1898,11 @@
 
     <!-- Login Screen -->
     <div class="login-screen" id="loginScreen">
+        <!-- Install Prompt (above login card) -->
+        <div class="install-prompt" id="installPrompt">
+            <button class="install-btn" id="installBtn">Download DRAGO App</button>
+            <button class="install-dismiss" id="installDismiss">Not now</button>
+        </div>
         <div class="login-container">
             <div class="login-logo">DRAGO</div>
             <form class="login-form" id="loginForm">
@@ -1916,12 +1914,6 @@
             <p style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--drago-text-light);">
                 Sign in with your company email
             </p>
-        </div>
-        <!-- Install Prompt (shown outside login card, on teal background) -->
-        <div class="install-prompt" id="installPrompt">
-            <p>Install DRAGO for quick access</p>
-            <button class="install-btn" id="installBtn">Add to Home Screen</button>
-            <button class="install-dismiss" id="installDismiss">Not now</button>
         </div>
     </div>
 
