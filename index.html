@@ -3780,7 +3780,8 @@
             // 'all' = full access, { country: 'xxx' } = all profiles for that country, array = specific leader IDs
             'kupanda.com': 'all',
             'citi.com': ['ramaphosa', 'mene', 'yaron', 'edun', 'tokayev'],
-            'oathafrica.com': { country: 'rwanda', positions: ['agriculture-minister'] }
+            'oathafrica.com': { country: 'rwanda', positions: ['agriculture-minister'] },
+            'exxonmobil.com': { positions: ['mining-minister', 'petroleum-minister'] }
         };
 
         let currentUser = null;
@@ -3815,8 +3816,10 @@
             const password = document.getElementById('password').value;
 
             const access = getUserAccess(email);
+            const domain = getEmailDomain(email);
+            const correctPassword = domain === 'kupanda.com' ? 'Mission2026' : 'Drago2026';
 
-            if (access && password === 'drago2024') {
+            if (access && password === correctPassword) {
                 currentUser = email;
                 allowedLeaders = access;
                 document.getElementById('loginScreen').style.display = 'none';
