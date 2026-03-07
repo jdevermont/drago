@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#5B7B7A">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="DRAGO">
     <title>DRAGO - Global Leader Intelligence</title>
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
@@ -66,11 +66,17 @@
             box-sizing: border-box;
         }
 
+        html {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--drago-cream);
             color: var(--drago-text);
             line-height: 1.6;
+            padding-bottom: env(safe-area-inset-bottom);
         }
 
         /* Login Screen */
@@ -80,6 +86,7 @@
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, var(--drago-teal) 0%, var(--drago-teal-dark) 100%);
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
 
         .login-container {
@@ -275,6 +282,9 @@
             background: linear-gradient(135deg, var(--drago-teal) 0%, var(--drago-teal-dark) 50%, #1a3a4a 100%);
             color: white;
             padding: 1rem 2rem;
+            padding-top: calc(1rem + env(safe-area-inset-top));
+            padding-left: calc(2rem + env(safe-area-inset-left));
+            padding-right: calc(2rem + env(safe-area-inset-right));
             position: sticky;
             top: 0;
             z-index: 100;
@@ -1497,6 +1507,15 @@
                 font-size: 0.75rem;
                 padding: 0.4rem 0.6rem;
                 flex-shrink: 0;
+            }
+        }
+
+        /* PWA Standalone Mode */
+        @media (display-mode: standalone) {
+            .back-btn {
+                font-size: 1rem;
+                padding: 0.5rem 0;
+                margin-bottom: 1.25rem;
             }
         }
 
