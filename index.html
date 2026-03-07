@@ -163,7 +163,7 @@
         /* Install Prompt */
         .install-prompt {
             display: none;
-            margin-bottom: 1.25rem;
+            margin-top: 1.25rem;
             text-align: center;
         }
 
@@ -1898,11 +1898,6 @@
 
     <!-- Login Screen -->
     <div class="login-screen" id="loginScreen">
-        <!-- Install Prompt (above login card) -->
-        <div class="install-prompt" id="installPrompt">
-            <button class="install-btn" id="installBtn">Download DRAGO App</button>
-            <button class="install-dismiss" id="installDismiss">Not now</button>
-        </div>
         <div class="login-container">
             <div class="login-logo">DRAGO</div>
             <form class="login-form" id="loginForm">
@@ -1914,6 +1909,11 @@
             <p style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--drago-text-light);">
                 Sign in with your company email
             </p>
+        </div>
+        <!-- Install Prompt (below login card) -->
+        <div class="install-prompt" id="installPrompt">
+            <button class="install-btn" id="installBtn">Download DRAGO App</button>
+            <button class="install-dismiss" id="installDismiss">Not now</button>
         </div>
     </div>
 
