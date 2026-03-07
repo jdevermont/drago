@@ -1969,9 +1969,11 @@
             ],
             quote: 'Massano has been unapologetic about his reforms, especially the abolition of the fuel subsidy and its resulting street protests. In public remarks, he explained that "we planned gradual subsidy removal. Reality demanded faster action. We adapted. Rigidity in tactics while pursuing strategic goals is foolishness."',
             video: {
-            type: 'external',
+            type: 'brightcove',
             title: 'Angola Reiterates Need for Acceleration of Food Security',
-            url: 'https://www.cnbcafrica.com/media/6352595093112/angola-reiterates-need-for-acceleration-of-food-security'
+            url: 'https://www.cnbcafrica.com/media/6352595093112/angola-reiterates-need-for-acceleration-of-food-security',
+            accountId: '6057955867001',
+            videoId: '6352595093112'
             }
             },
             onTheirMind: [
@@ -3205,7 +3207,14 @@
                         description: 'Ingabire emphasizes Rwanda\'s "proof-of-concept" approach: "We do not necessarily wait for a perfect environment where you have the right regulations or the funding required to get things done. Even with the constraints that we may have, we still are able to find ways where technology is able to support us."'
                     }
                 ],
-                quote: 'Ingabire occasionally reveals a more personal side in her interviews and engagements. She uses her own story\u2014"as a tech-enthusiast, a wife and mother of three"\u2014who became a minister in her thirties to inspire young women.'
+                quote: 'Ingabire occasionally reveals a more personal side in her interviews and engagements. She uses her own story\u2014"as a tech-enthusiast, a wife and mother of three"\u2014who became a minister in her thirties to inspire young women.',
+                video: {
+                    type: 'youtube',
+                    url: 'https://www.youtube.com/watch?v=YXKvhsLhNu8',
+                    embedId: 'YXKvhsLhNu8',
+                    startTime: 0,
+                    title: 'Paula Ingabire Interview'
+                }
             },
             onTheirMind: [
                 {
@@ -4077,15 +4086,18 @@
                                             </iframe>
                                         </div>
                                     ` : `
-                                        <div class="video-iframe-wrapper">
-                                            <iframe
-                                                src="${leader.meetingWithThem.video.url}"
-                                                title="${leader.meetingWithThem.video.title}"
-                                                frameborder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowfullscreen>
-                                            </iframe>
-                                        </div>
+                                        <a href="${leader.meetingWithThem.video.url}" target="_blank" style="display:block;text-decoration:none;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
+                                            <div style="background:#1a1a2e;padding:3rem;display:flex;align-items:center;justify-content:center;">
+                                                <div style="width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;">
+                                                    <svg viewBox="0 0 24 24" width="28" height="28" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+                                                </div>
+                                            </div>
+                                            <div style="padding:1rem;background:white;">
+                                                <div style="font-size:0.8rem;color:#718096;margin-bottom:0.25rem;">External Video</div>
+                                                <div style="font-size:0.95rem;color:#2D3748;font-weight:500;">${leader.meetingWithThem.video.title}</div>
+                                                <div style="font-size:0.85rem;color:#5B7B7A;margin-top:0.5rem;">Click to watch →</div>
+                                            </div>
+                                        </a>
                                     `}
                                 </div>
                             ` : ''}
