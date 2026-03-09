@@ -1900,8 +1900,16 @@
                     <input type="text" id="requestPosition" placeholder="Leader's position/title" required>
                 </div>
                 <div>
-                    <label for="requestDueDate">Due Date</label>
-                    <input type="date" id="requestDueDate" required>
+                    <label for="requestDueDate">Due Date (minimum 2 days out)</label>
+                    <input type="date" id="requestDueDate" required onchange="(function(el){ var d=new Date(); d.setDate(d.getDate()+2); var m=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); if(el.value<m){el.value=m;} })(this)">
+                    <script>
+                        (function() {
+                            var d = new Date();
+                            d.setDate(d.getDate() + 2);
+                            var min = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+                            document.getElementById('requestDueDate').setAttribute('min', min);
+                        })();
+                    </script>
                 </div>
                 <div class="modal-buttons">
                     <button type="button" class="modal-btn modal-btn-cancel" onclick="closeRequestModal()">Cancel</button>
@@ -4664,12 +4672,31 @@
                 });
         }
 
+        function getMinRequestDate() {
+            const minDate = new Date();
+            minDate.setDate(minDate.getDate() + 2);
+            const year = minDate.getFullYear();
+            const month = String(minDate.getMonth() + 1).padStart(2, '0');
+            const day = String(minDate.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
         function requestProfile() {
             document.getElementById('requestModal').classList.add('active');
-            // Set minimum date to today
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('requestDueDate').setAttribute('min', today);
+            // Set minimum date to 2 days from now (36-hour minimum turnaround)
+            const minDateStr = getMinRequestDate();
+            const dateInput = document.getElementById('requestDueDate');
+            dateInput.min = minDateStr;
+            dateInput.value = '';
         }
+
+        // Block invalid date selection in real time
+        document.getElementById('requestDueDate').addEventListener('input', function() {
+            const minDateStr = getMinRequestDate();
+            if (this.value && this.value < minDateStr) {
+                this.value = minDateStr;
+            }
+        });
 
         function closeRequestModal() {
             document.getElementById('requestModal').classList.remove('active');
@@ -4685,6 +4712,16 @@
             const leader = document.getElementById('requestLeader').value;
             const position = document.getElementById('requestPosition').value;
             const dueDate = document.getElementById('requestDueDate').value;
+
+            // Validate minimum 36-hour turnaround
+            const minDate = new Date();
+            minDate.setDate(minDate.getDate() + 2);
+            minDate.setHours(0, 0, 0, 0);
+            const selectedDate = new Date(dueDate + 'T00:00:00');
+            if (selectedDate < minDate) {
+                alert('Please select a date at least 2 days from today to allow for a 36-hour turnaround.');
+                return;
+            }
 
             // Format due date nicely
             const dueDateFormatted = new Date(dueDate + 'T00:00:00').toLocaleDateString('en-US', {
