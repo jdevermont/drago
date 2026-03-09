@@ -1900,7 +1900,7 @@
                     <input type="text" id="requestPosition" placeholder="Leader's position/title" required>
                 </div>
                 <div>
-                    <label for="requestDueDate">Due Date (minimum 2 days out)</label>
+                    <label for="requestDueDate">Due Date</label>
                     <input type="date" id="requestDueDate" required onchange="(function(el){ var d=new Date(); d.setDate(d.getDate()+2); var m=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); if(el.value<m){el.value=m;} })(this)">
                     <script>
                         (function() {
