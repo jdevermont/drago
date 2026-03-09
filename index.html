@@ -4948,6 +4948,14 @@
         loadAlerts();
         renderLeaders();
         updateAlertCounts();
+
+        // Open request modal if redirected from another page
+        if (new URLSearchParams(window.location.search).get('openRequest') === 'true') {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+            requestProfile();
+            window.history.replaceState({}, '', window.location.pathname);
+        }
     </script>
 
     <!-- Service Worker Registration -->

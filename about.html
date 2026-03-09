@@ -245,9 +245,7 @@
 
     <script>
         function requestProfile() {
-            const subject = encodeURIComponent('Profile Request');
-            const body = encodeURIComponent(`We request a profile of [leader's name], [leader's title] by [date].`);
-            window.location.href = `mailto:info@kupanda.com?subject=${subject}&body=${body}`;
+            window.location.href = 'index.html?openRequest=true';
         }
     </script>
 </body>
