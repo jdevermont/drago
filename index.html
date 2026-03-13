@@ -4584,6 +4584,12 @@
         }
 
         function playVideo(element, embedId, startTime) {
+            // In standalone (PWA) mode, iOS restricts YouTube iframes — open directly instead
+            if (document.documentElement.classList.contains('standalone')) {
+                const timeParam = startTime ? `&t=${startTime}` : '';
+                window.open(`https://www.youtube.com/watch?v=${embedId}${timeParam}`, '_blank');
+                return;
+            }
             const wrapper = element;
             wrapper.outerHTML = `
                 <div class="video-iframe-wrapper">
