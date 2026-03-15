@@ -4995,17 +4995,32 @@
             const domainPdf = `drago-${leaderId}-${domainKey}.pdf`;
             const standardPdf = `drago-${leaderId}-standard.pdf`;
 
+            function openPdf(url) {
+                // In standalone (PWA) mode, window.open may be blocked — use location or anchor
+                if (document.documentElement.classList.contains('standalone')) {
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.target = '_blank';
+                    a.rel = 'noopener';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                } else {
+                    window.open(url, '_blank');
+                }
+            }
+
             // Check if domain-specific PDF exists
             fetch(domainPdf, { method: 'HEAD' })
                 .then(response => {
                     if (response.ok) {
-                        window.open(domainPdf, '_blank');
+                        openPdf(domainPdf);
                     } else {
-                        window.open(standardPdf, '_blank');
+                        openPdf(standardPdf);
                     }
                 })
                 .catch(() => {
-                    window.open(standardPdf, '_blank');
+                    openPdf(standardPdf);
                 });
         }
 
