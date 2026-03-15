@@ -2025,6 +2025,32 @@
     if (window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
         document.documentElement.classList.add('standalone');
     }
+
+    // Auto-update: check server version and force reload if outdated
+    (function() {
+        var APP_VERSION = '12';
+        fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (data.version && data.version !== APP_VERSION) {
+                    // Unregister service worker and hard reload
+                    if ('serviceWorker' in navigator) {
+                        navigator.serviceWorker.getRegistrations().then(function(regs) {
+                            regs.forEach(function(reg) { reg.unregister(); });
+                            // Clear all caches
+                            caches.keys().then(function(names) {
+                                Promise.all(names.map(function(n) { return caches.delete(n); })).then(function() {
+                                    window.location.reload(true);
+                                });
+                            });
+                        });
+                    } else {
+                        window.location.reload(true);
+                    }
+                }
+            })
+            .catch(function() { /* offline or error — use cached version */ });
+    })();
 </script>
     <!-- Splash Screen (PWA only) -->
     <div class="splash-screen" id="splashScreen" style="display: none;">

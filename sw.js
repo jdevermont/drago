@@ -1,4 +1,4 @@
-const CACHE_NAME = 'drago-v12';
+const CACHE_NAME = 'drago-v13';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -25,6 +25,12 @@ self.addEventListener('install', event => {
 
 // Network-first strategy: try network, fall back to cache
 self.addEventListener('fetch', event => {
+  // Never cache version.json — always fetch from network for auto-update checks
+  if (event.request.url.includes('version.json')) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
   event.respondWith(
     fetch(event.request)
       .then(response => {
