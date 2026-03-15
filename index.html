@@ -2028,7 +2028,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '12';
+        var APP_VERSION = '14';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -5150,15 +5150,10 @@
             const standardPdf = `drago-${leaderId}-standard.pdf`;
 
             function openPdf(url) {
-                // In standalone (PWA) mode, window.open may be blocked — use location or anchor
+                // In standalone (PWA) mode on iOS, window.open and anchor clicks are blocked
+                // Use location.href to open PDFs — this exits the PWA to Safari
                 if (document.documentElement.classList.contains('standalone')) {
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.target = '_blank';
-                    a.rel = 'noopener';
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
+                    window.location.href = window.location.origin + '/' + url;
                 } else {
                     window.open(url, '_blank');
                 }
