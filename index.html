@@ -1781,49 +1781,58 @@
 
         /* --- Profile View: cleaner --- */
         html.standalone .profile-header {
-            padding: 0.75rem 1.25rem 1rem;
+            padding: 0.5rem 1rem 0.75rem;
         }
 
         html.standalone .profile-header-content {
-            flex-direction: row;
-            gap: 1rem;
+            flex-direction: column;
             align-items: center;
+            text-align: center;
+            gap: 0.5rem;
         }
 
         html.standalone .profile-photo {
-            width: 80px;
-            height: 80px;
+            width: 64px;
+            height: 64px;
             border-radius: 10px;
             border-width: 2px;
         }
 
+        html.standalone .profile-info {
+            text-align: center;
+        }
+
         html.standalone .profile-name {
-            font-size: 1.25rem;
-            margin-bottom: 0.1rem;
+            font-size: 1.15rem;
+            margin-bottom: 0;
         }
 
         html.standalone .profile-pronunciation {
-            font-size: 0.8rem;
-            margin-bottom: 0.25rem;
+            font-size: 0.75rem;
+            margin-bottom: 0.15rem;
+            justify-content: center;
         }
 
         html.standalone .profile-title {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         html.standalone .profile-country {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         html.standalone .profile-meta {
-            font-size: 0.75rem;
-            margin-top: 0.25rem;
+            font-size: 0.7rem;
+            margin-top: 0.15rem;
+            flex-direction: column;
+            gap: 0;
         }
 
         html.standalone .back-btn {
-            font-size: 0.85rem;
-            padding: 0.15rem 0;
-            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            padding: 0;
+            margin-bottom: 0.25rem;
+            align-self: flex-start;
         }
 
         html.standalone .profile-content {
@@ -1860,15 +1869,18 @@
             padding: 1.25rem;
         }
 
-        /* --- Profile actions: compact --- */
+        /* --- Profile actions: compact row below info --- */
         html.standalone .profile-actions {
             gap: 0.5rem;
-            margin-top: 0.5rem;
+            margin-top: 0.25rem;
+            justify-content: center;
+            flex-wrap: nowrap;
         }
 
         html.standalone .btn {
-            font-size: 0.75rem;
-            padding: 0.4rem 0.65rem;
+            font-size: 0.7rem;
+            padding: 0.35rem 0.6rem;
+            white-space: nowrap;
         }
 
         /* Twitter Feed */
@@ -2067,7 +2079,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '15';
+        var APP_VERSION = '16';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
