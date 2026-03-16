@@ -2079,7 +2079,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '16';
+        var APP_VERSION = '17';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -5201,12 +5201,33 @@
             const standardPdf = `drago-${leaderId}-standard.pdf`;
 
             function openPdf(url) {
-                // In standalone (PWA) mode on iOS, window.open and anchor clicks are blocked
-                // Use location.href to open PDFs — this exits the PWA to Safari
+                // In standalone (PWA) mode, show PDF in an in-app overlay
                 if (document.documentElement.classList.contains('standalone')) {
-                    window.location.href = window.location.origin + '/' + url;
+                    var overlay = document.getElementById('pdfViewerOverlay');
+                    if (!overlay) {
+                        overlay = document.createElement('div');
+                        overlay.id = 'pdfViewerOverlay';
+                        overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:10000;background:#fff;display:flex;flex-direction:column;';
+                        overlay.innerHTML = '<div style="display:flex;align-items:center;justify-content:space-between;padding:0.5rem 1rem;background:var(--drago-teal);color:white;padding-top:calc(0.5rem + env(safe-area-inset-top));">'
+                            + '<button onclick="closePdfViewer()" style="background:none;border:none;color:white;font-size:1rem;cursor:pointer;padding:0.25rem 0.5rem;">← Back</button>'
+                            + '<span style="font-size:0.85rem;font-weight:600;">PDF Viewer</span>'
+                            + '<div style="width:60px;"></div>'
+                            + '</div>'
+                            + '<iframe id="pdfViewerFrame" style="flex:1;border:none;width:100%;"></iframe>';
+                        document.body.appendChild(overlay);
+                    }
+                    overlay.style.display = 'flex';
+                    document.getElementById('pdfViewerFrame').src = url;
                 } else {
                     window.open(url, '_blank');
+                }
+            }
+
+            function closePdfViewer() {
+                var overlay = document.getElementById('pdfViewerOverlay');
+                if (overlay) {
+                    document.getElementById('pdfViewerFrame').src = '';
+                    overlay.style.display = 'none';
                 }
             }
 
