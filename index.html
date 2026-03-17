@@ -5275,12 +5275,10 @@
         }
 
         function markAlertRead(alertId) {
-            const alert = alertsData.find(a => a.id === alertId);
-            if (alert) {
-                alert.read = true;
-                saveAlerts();
-                updateAlertCounts();
-            }
+            alertsData = alertsData.filter(a => a.id !== alertId);
+            saveAlerts();
+            renderAlerts();
+            updateAlertCounts();
         }
 
         function deleteAlert(alertId) {
