@@ -2079,7 +2079,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '23';
+        var APP_VERSION = '24';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -3501,6 +3501,7 @@
             {
             id: 'alake',
             name: 'Henry Oladele "Dele" Alake',
+            shortName: 'Dele Alake',
             pronunciation: 'uh-LAH-kay',
             title: 'Minister of Solid Minerals',
             country: 'Nigeria',
@@ -4950,7 +4951,7 @@
                     <div class="card-header">
                         <img src="${leader.photo}" alt="${leader.name}" class="card-photo">
                         <div class="card-info">
-                            <div class="card-name">${leader.name}</div>
+                            <div class="card-name">${document.documentElement.classList.contains('standalone') && leader.shortName ? leader.shortName : leader.name}</div>
                             <div class="card-title">${leader.title}</div>
                             <div class="card-country">📍 ${leader.country}</div>
                         </div>
