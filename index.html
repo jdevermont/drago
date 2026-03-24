@@ -2079,7 +2079,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '27';
+        var APP_VERSION = '28';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -5741,9 +5741,30 @@
             const domain = getEmailDomain(currentUser);
             const domainKey = domain.replace('.com', '').replace('.org', '').replace('.net', '');
 
-            // Try domain-specific PDF first, fall back to standard
-            const domainPdf = `drago-${leaderId}-${domainKey}.pdf`;
-            const standardPdf = `drago-${leaderId}-standard.pdf`;
+            // Build list of PDF candidates: versioned (highest first), then base
+            // Pattern: drago-{id}-{type}-3.pdf, -2.pdf, -1.pdf, then drago-{id}-{type}.pdf
+            function buildPdfCandidates(leaderId, type) {
+                var candidates = [];
+                for (var v = 5; v >= 1; v--) {
+                    candidates.push('drago-' + leaderId + '-' + type + '-' + v + '.pdf');
+                }
+                candidates.push('drago-' + leaderId + '-' + type + '.pdf');
+                return candidates;
+            }
+
+            // Try each candidate in order, use first one that exists
+            function findBestPdf(candidates, callback) {
+                function tryNext(i) {
+                    if (i >= candidates.length) { callback(null); return; }
+                    fetch(candidates[i], { method: 'HEAD' })
+                        .then(function(r) {
+                            if (r.ok) { callback(candidates[i]); }
+                            else { tryNext(i + 1); }
+                        })
+                        .catch(function() { tryNext(i + 1); });
+                }
+                tryNext(0);
+            }
 
             function openPdf(url) {
                 // In standalone (PWA) mode, show PDF in an in-app overlay
@@ -5805,18 +5826,18 @@
                 }
             }
 
-            // Check if domain-specific PDF exists
-            fetch(domainPdf, { method: 'HEAD' })
-                .then(response => {
-                    if (response.ok) {
-                        openPdf(domainPdf);
-                    } else {
-                        openPdf(standardPdf);
-                    }
-                })
-                .catch(() => {
-                    openPdf(standardPdf);
-                });
+            // Try domain-specific PDFs first (versioned then base), fall back to standard PDFs
+            var domainCandidates = buildPdfCandidates(leaderId, domainKey);
+            var standardCandidates = buildPdfCandidates(leaderId, 'standard');
+            findBestPdf(domainCandidates, function(domainPdf) {
+                if (domainPdf) {
+                    openPdf(domainPdf);
+                } else {
+                    findBestPdf(standardCandidates, function(standardPdf) {
+                        if (standardPdf) { openPdf(standardPdf); }
+                    });
+                }
+            });
         }
 
         function getMinRequestDate() {
