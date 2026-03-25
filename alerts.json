@@ -2,57 +2,46 @@
   {
     "id": "news-nathanielsen-20260325",
     "leaderId": "nathanielsen",
-    "headline": "Nathanielsen wins Greenland's Danish parliament seat; investor interest in mining surging",
-    "link": "",
+    "headline": "Greenland independence party wins seat in Danish parliament at key moment",
+    "summary": "Reuters, Mar 25, 2026",
+    "link": "https://www.reuters.com/world/europe/greenland-independence-party-wins-seat-danish-parliament-key-moment-2026-03-25/",
     "date": "2026-03-25",
     "read": false
   },
   {
-    "id": "news-tokayev-20260325",
+    "id": "news-tokayev-20260315",
     "leaderId": "tokayev",
-    "headline": "Kazakhstan holds constitutional referendum to extend presidential power",
-    "link": "",
-    "date": "2026-03-25",
+    "headline": "Kazakhstan approves new constitution in referendum, exit poll says",
+    "summary": "Reuters, Mar 15, 2026",
+    "link": "https://www.reuters.com/world/asia-pacific/kazakhstan-approves-new-constitution-referendum-exit-poll-says-2026-03-15/",
+    "date": "2026-03-15",
     "read": false
   },
   {
-    "id": "news-joho-20260325",
+    "id": "news-joho-20260309",
     "leaderId": "joho",
-    "headline": "Joho removed from Azimio Coalition Council; continues as Mining Cabinet Secretary",
-    "link": "",
-    "date": "2026-03-25",
+    "headline": "Azimio kicks out Joho, Junet, Wandayi in major leadership reshuffle",
+    "summary": "The Star (Kenya), Mar 9, 2026",
+    "link": "https://www.the-star.co.ke/news/2026-03-09-azimio-kicks-out-joho-wandayi-in-reshuffle",
+    "date": "2026-03-09",
     "read": false
   },
   {
-    "id": "news-tinubu-20260325",
+    "id": "news-tinubu-20260318",
     "leaderId": "tinubu",
-    "headline": "UK State Visit hosted by King Charles — first since 1989; ordered appointees to resign by Mar 31",
-    "link": "",
-    "date": "2026-03-25",
+    "headline": "Nigeria's President Tinubu meets royals in UK state visit",
+    "summary": "Al Jazeera, Mar 18, 2026",
+    "link": "https://www.aljazeera.com/news/2026/3/18/nigerias-president-tinubu-meets-royals-in-historic-uk-state-visit",
+    "date": "2026-03-18",
     "read": false
   },
   {
-    "id": "news-ndabamenye-20260325",
-    "leaderId": "ndabamenye",
-    "headline": "Ndabamenye challenges youth on agriculture; Rwanda working on GMO adoption laws",
-    "link": "",
-    "date": "2026-03-25",
-    "read": false
-  },
-  {
-    "id": "news-kabuswe-20260325",
+    "id": "news-kabuswe-20260311",
     "leaderId": "kabuswe",
-    "headline": "Zambia seeking investors to triple copper output by 2031",
-    "link": "",
-    "date": "2026-03-25",
-    "read": false
-  },
-  {
-    "id": "news-mene-20260325",
-    "leaderId": "mene",
-    "headline": "Mene visits CAR to accelerate AfCFTA participation",
-    "link": "",
-    "date": "2026-03-25",
+    "headline": "Zambia seeking global investors to help triple copper output by 2031",
+    "summary": "MINING.COM, Mar 11, 2026",
+    "link": "https://www.mining.com/web/zambia-seeking-global-investors-to-help-triple-copper-output-by-2031/",
+    "date": "2026-03-11",
     "read": false
   }
 ]
