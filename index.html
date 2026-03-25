@@ -5186,7 +5186,7 @@
             if (access && password === correctPassword) {
                 currentUser = email;
                 allowedLeaders = access;
-                sessionTracker.start(email);
+                if (getEmailDomain(email) !== 'kupanda.com') { sessionTracker.start(email); }
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('app').style.display = 'block';
 
