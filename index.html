@@ -2079,7 +2079,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '31';
+        var APP_VERSION = '32';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -5943,9 +5943,9 @@
                         document.body.appendChild(overlay);
                     }
                     overlay.style.display = 'flex';
-                    // Use Google Docs viewer for full multi-page PDF scrolling on iOS
+                    // Use Mozilla's PDF.js viewer for reliable multi-page PDF rendering on iOS
                     var fullUrl = url.startsWith('http') ? url : window.location.origin + '/' + url.replace(/^\//, '');
-                    document.getElementById('pdfViewerFrame').src = 'https://docs.google.com/gview?embedded=true&url=' + encodeURIComponent(fullUrl);
+                    document.getElementById('pdfViewerFrame').src = 'https://mozilla.github.io/pdf.js/web/viewer.html?file=' + encodeURIComponent(fullUrl);
                 } else {
                     window.open(url, '_blank');
                 }
