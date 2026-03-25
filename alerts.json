@@ -1,1 +1,58 @@
-[]
+[
+  {
+    "id": "news-nathanielsen-20260325",
+    "leaderId": "nathanielsen",
+    "headline": "Nathanielsen wins Greenland's Danish parliament seat; investor interest in mining surging",
+    "link": "",
+    "date": "2026-03-25",
+    "read": false
+  },
+  {
+    "id": "news-tokayev-20260325",
+    "leaderId": "tokayev",
+    "headline": "Kazakhstan holds constitutional referendum to extend presidential power",
+    "link": "",
+    "date": "2026-03-25",
+    "read": false
+  },
+  {
+    "id": "news-joho-20260325",
+    "leaderId": "joho",
+    "headline": "Joho removed from Azimio Coalition Council; continues as Mining Cabinet Secretary",
+    "link": "",
+    "date": "2026-03-25",
+    "read": false
+  },
+  {
+    "id": "news-tinubu-20260325",
+    "leaderId": "tinubu",
+    "headline": "UK State Visit hosted by King Charles — first since 1989; ordered appointees to resign by Mar 31",
+    "link": "",
+    "date": "2026-03-25",
+    "read": false
+  },
+  {
+    "id": "news-ndabamenye-20260325",
+    "leaderId": "ndabamenye",
+    "headline": "Ndabamenye challenges youth on agriculture; Rwanda working on GMO adoption laws",
+    "link": "",
+    "date": "2026-03-25",
+    "read": false
+  },
+  {
+    "id": "news-kabuswe-20260325",
+    "leaderId": "kabuswe",
+    "headline": "Zambia seeking investors to triple copper output by 2031",
+    "link": "",
+    "date": "2026-03-25",
+    "read": false
+  },
+  {
+    "id": "news-mene-20260325",
+    "leaderId": "mene",
+    "headline": "Mene visits CAR to accelerate AfCFTA participation",
+    "link": "",
+    "date": "2026-03-25",
+    "read": false
+  }
+]
