@@ -2079,7 +2079,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '30';
+        var APP_VERSION = '31';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -5682,7 +5682,8 @@
         }
 
         function markAlertRead(alertId) {
-            alertsData = alertsData.filter(a => a.id !== alertId);
+            var alert = alertsData.find(a => a.id === alertId);
+            if (alert) { alert.read = true; }
             saveAlerts();
             renderAlerts();
             updateAlertCounts();
@@ -5722,6 +5723,27 @@
                 console.error('Error loading alerts:', e);
                 alertsData = [...defaultAlerts];
             }
+            // Also fetch server-side alerts (from news scan)
+            fetch('alerts.json?_=' + Date.now(), { cache: 'no-store' })
+                .then(function(r) { return r.json(); })
+                .then(function(serverAlerts) {
+                    if (!Array.isArray(serverAlerts) || serverAlerts.length === 0) return;
+                    serverAlerts.forEach(function(sa) {
+                        var existing = alertsData.findIndex(function(a) { return a.id === sa.id; });
+                        if (existing >= 0) {
+                            // Keep user's read state
+                            var wasRead = alertsData[existing].read;
+                            alertsData[existing] = Object.assign({}, sa, { read: wasRead });
+                        } else {
+                            alertsData.push(sa);
+                        }
+                    });
+                    alertsData.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+                    saveAlerts();
+                    renderAlerts();
+                    updateAlertCounts();
+                })
+                .catch(function() { /* offline or no alerts.json */ });
         }
 
         function renderAlerts() {
@@ -6209,8 +6231,8 @@
             content.innerHTML = `
                 <h2 style="margin-bottom:1rem;color:#4A6B6B;">Alerts for ${leader.name}</h2>
                 ${leaderAlerts.map(a => `
-                    <div style="padding:1rem 0;border-bottom:1px solid #eee;">
-                        <a href="${a.link}" target="_blank" onclick="markAlertRead('${a.id}')" style="color:#5B7B7A;font-weight:${a.read ? '400' : '600'};text-decoration:none;">${a.headline}</a>
+                    <div style="padding:1rem 0;border-bottom:1px solid #eee;" id="alertItem-${a.id}">
+                        <a href="${a.link}" target="_blank" onclick="markAlertRead('${a.id}'); var el=document.getElementById('alertItem-${a.id}'); if(el){el.querySelector('a').style.fontWeight='400';} updateAlertCounts();" style="color:#5B7B7A;font-weight:${a.read ? '400' : '600'};text-decoration:none;">${a.headline}</a>
                         ${a.summary ? `<div style="font-size:0.85rem;color:#444;margin-top:0.4rem;line-height:1.5;">${a.summary}</div>` : ''}
                         <div style="font-size:0.8rem;color:#888;margin-top:0.25rem;">${formatAlertDate(a.date)}</div>
                     </div>
