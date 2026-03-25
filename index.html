@@ -2079,7 +2079,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '29';
+        var APP_VERSION = '30';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -5089,6 +5089,68 @@
         let currentUser = null;
         let allowedLeaders = [];
 
+        // --- Activity Tracking ---
+        var sessionTracker = {
+            loginTime: null,
+            user: null,
+            domain: null,
+            profileViews: [],
+            pdfDownloads: [],
+            sent: false,
+            start: function(email) {
+                this.loginTime = new Date();
+                this.user = email;
+                this.domain = email.split('@')[1] || '';
+                this.profileViews = [];
+                this.pdfDownloads = [];
+                this.sent = false;
+            },
+            logProfileView: function(leaderId, leaderName) {
+                this.profileViews.push({ id: leaderId, name: leaderName, time: new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }) });
+            },
+            logPdfDownload: function(leaderId) {
+                this.pdfDownloads.push({ id: leaderId, time: new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }) });
+            },
+            getSessionDuration: function() {
+                if (!this.loginTime) return '0 min';
+                var mins = Math.round((new Date() - this.loginTime) / 60000);
+                if (mins < 1) return 'Less than 1 min';
+                if (mins === 1) return '1 min';
+                return mins + ' mins';
+            },
+            sendSummary: function() {
+                if (this.sent || !this.user) return;
+                this.sent = true;
+                var profileList = this.profileViews.length > 0
+                    ? this.profileViews.map(function(p) { return p.name + ' (' + p.time + ')'; }).join(', ')
+                    : 'None';
+                var pdfList = this.pdfDownloads.length > 0
+                    ? this.pdfDownloads.map(function(p) { return p.id + ' (' + p.time + ')'; }).join(', ')
+                    : 'None';
+                var now = new Date();
+                var estOptions = { timeZone: 'America/New_York', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true };
+                var loginTimeStr = this.loginTime.toLocaleString('en-US', estOptions) + ' EST';
+
+                emailjs.send('service_5poo91b', 'template_1m5ryo5', {
+                    from_email: this.user,
+                    request_time: loginTimeStr,
+                    leader: 'SESSION LOG: ' + this.user + ' (' + this.domain + ')',
+                    position: 'Profiles viewed: ' + profileList,
+                    due_date: 'PDFs downloaded: ' + pdfList + ' | Duration: ' + this.getSessionDuration()
+                }).catch(function(err) { console.error('Tracking error:', err); });
+            }
+        };
+
+        // Send session summary when user leaves
+        window.addEventListener('beforeunload', function() {
+            sessionTracker.sendSummary();
+        });
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'hidden') {
+                sessionTracker.sendSummary();
+            }
+        });
+
         function getEmailDomain(email) {
             return email.split('@')[1]?.toLowerCase() || '';
         }
@@ -5124,6 +5186,7 @@
             if (access && password === correctPassword) {
                 currentUser = email;
                 allowedLeaders = access;
+                sessionTracker.start(email);
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('app').style.display = 'block';
 
@@ -5138,6 +5201,7 @@
         });
 
         function logout() {
+            sessionTracker.sendSummary();
             currentUser = null;
             allowedLeaders = [];
             document.getElementById('loginScreen').style.display = 'flex';
@@ -5279,6 +5343,9 @@
                 alert('You do not have access to this profile.');
                 return;
             }
+            // Track profile view
+            var viewedLeader = leaders.find(function(l) { return l.id === leaderId; });
+            if (viewedLeader) { sessionTracker.logProfileView(leaderId, viewedLeader.name); }
 
             const leader = leaders.find(l => l.id === leaderId);
             if (!leader) return;
@@ -5781,6 +5848,7 @@
         }
 
         function downloadPDF(leaderId) {
+            sessionTracker.logPdfDownload(leaderId);
             const domain = getEmailDomain(currentUser);
             const domainKey = domain.replace('.com', '').replace('.org', '').replace('.net', '');
 
