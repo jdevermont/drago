@@ -2079,7 +2079,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '28';
+        var APP_VERSION = '29';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -5307,6 +5307,9 @@
                             <button class="btn btn-primary" onclick="downloadPDF('${leader.id}')">
                                 📄 Download PDF
                             </button>
+                            <button class="btn btn-secondary" onclick="requestProfileUpdate('${leader.id}', '${leader.name}')">
+                                🔄 Request Update
+                            </button>
                             <button class="btn btn-secondary alerts-btn" onclick="showLeaderAlerts('${leader.id}')" id="alertsBtn-${leader.id}">
                                 <span class="alert-badge-count" id="alertCount-${leader.id}"></span>🔔 Alerts
                             </button>
@@ -5735,6 +5738,46 @@
             };
 
             window.speechSynthesis.speak(utterance);
+        }
+
+        function requestProfileUpdate(leaderId, leaderName) {
+            // Show confirmation message
+            var existingMsg = document.getElementById('updateMsg-' + leaderId);
+            if (existingMsg) { existingMsg.remove(); }
+
+            var btn = event.target.closest('button');
+            var msg = document.createElement('div');
+            msg.id = 'updateMsg-' + leaderId;
+            msg.style.cssText = 'background:#f0f7f7;border:1px solid #5B7B7A;border-radius:8px;padding:0.75rem 1rem;margin-top:0.5rem;font-size:0.85rem;color:#333;text-align:center;';
+            msg.textContent = 'Sending request...';
+            btn.parentElement.appendChild(msg);
+
+            // Get current time in EST
+            var now = new Date();
+            var estOptions = {
+                timeZone: 'America/New_York',
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+                hour: 'numeric', minute: '2-digit', hour12: true
+            };
+            var requestTime = now.toLocaleString('en-US', estOptions) + ' EST';
+
+            // Send via EmailJS using same service
+            emailjs.send('service_5poo91b', 'template_1m5ryo5', {
+                from_email: currentUser,
+                request_time: requestTime,
+                leader: leaderName,
+                position: 'Profile Update Request',
+                due_date: 'Within 48 hours'
+            }).then(function() {
+                msg.innerHTML = '✓ This profile will be updated within 48 hours.';
+                msg.style.background = '#e8f5e9';
+                msg.style.borderColor = '#4caf50';
+            }, function(error) {
+                msg.innerHTML = 'Failed to send request. Please try again.';
+                msg.style.background = '#ffeaea';
+                msg.style.borderColor = '#e57373';
+                console.error('EmailJS error:', error);
+            });
         }
 
         function downloadPDF(leaderId) {
