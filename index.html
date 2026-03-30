@@ -2079,7 +2079,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '33';
+        var APP_VERSION = '34';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -5558,7 +5558,7 @@
                                             </div>
                                         </div>
                                         <p style="text-align:center;margin-top:0.5rem;">
-                                            <a href="${leader.meetingWithThem.video.url}" target="_blank" style="font-size:0.8rem;color:var(--drago-teal);">Watch on YouTube →</a>
+                                            <a href="https://www.youtube.com/watch?v=${leader.meetingWithThem.video.embedId}${leader.meetingWithThem.video.startTime ? '&t=' + leader.meetingWithThem.video.startTime : ''}" target="_blank" style="font-size:0.8rem;color:var(--drago-teal);">Watch on YouTube →</a>
                                         </p>
                                     ` : leader.meetingWithThem.video.type === 'brightcove' ? `
                                         <a href="${leader.meetingWithThem.video.url}" target="_blank" style="display:block;text-decoration:none;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
@@ -5680,6 +5680,12 @@
         }
 
         function playVideo(element, embedId, startTime) {
+            // In standalone (PWA) mode, open YouTube directly (iOS blocks iframes)
+            if (document.documentElement.classList.contains('standalone')) {
+                const timeParam = startTime ? '&t=' + startTime : '';
+                window.open('https://www.youtube.com/watch?v=' + embedId + timeParam, '_blank');
+                return;
+            }
             const wrapper = element;
             wrapper.outerHTML = `
                 <div class="video-iframe-wrapper">
