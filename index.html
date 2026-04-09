@@ -2079,7 +2079,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '34';
+        var APP_VERSION = '35';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -5680,10 +5680,9 @@
         }
 
         function playVideo(element, embedId, startTime) {
-            // In standalone (PWA) mode, open YouTube directly (iOS blocks iframes)
+            // In standalone (PWA) mode, use in-app video overlay (window.open is blocked on iOS)
             if (document.documentElement.classList.contains('standalone')) {
-                const timeParam = startTime ? '&t=' + startTime : '';
-                window.open('https://www.youtube.com/watch?v=' + embedId + timeParam, '_blank');
+                openVideoViewer(embedId, startTime);
                 return;
             }
             const wrapper = element;
@@ -5698,6 +5697,55 @@
                     </iframe>
                 </div>
             `;
+        }
+
+        function openVideoViewer(embedId, startTime) {
+            var overlay = document.getElementById('videoViewerOverlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.id = 'videoViewerOverlay';
+                overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:10000;background:#000;display:flex;flex-direction:column;';
+
+                var header = document.createElement('div');
+                header.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:0.5rem 1rem;background:#5B7B7A;color:white;padding-top:calc(0.5rem + env(safe-area-inset-top));min-height:44px;flex-shrink:0;';
+
+                var backBtn = document.createElement('div');
+                backBtn.textContent = '← Back';
+                backBtn.style.cssText = 'color:white;font-size:1rem;cursor:pointer;padding:0.5rem 0.75rem;-webkit-tap-highlight-color:rgba(255,255,255,0.3);user-select:none;';
+                backBtn.addEventListener('touchend', function(e) { e.preventDefault(); closeVideoViewer(); });
+                backBtn.addEventListener('click', function(e) { e.preventDefault(); closeVideoViewer(); });
+
+                var title = document.createElement('span');
+                title.textContent = 'Video';
+                title.style.cssText = 'font-size:0.85rem;font-weight:600;';
+
+                var spacer = document.createElement('div');
+                spacer.style.cssText = 'width:70px;';
+
+                header.appendChild(backBtn);
+                header.appendChild(title);
+                header.appendChild(spacer);
+
+                var frame = document.createElement('iframe');
+                frame.id = 'videoViewerFrame';
+                frame.style.cssText = 'flex:1;border:none;width:100%;';
+                frame.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+                frame.setAttribute('allowfullscreen', '');
+
+                overlay.appendChild(header);
+                overlay.appendChild(frame);
+                document.body.appendChild(overlay);
+            }
+            overlay.style.display = 'flex';
+            document.getElementById('videoViewerFrame').src = 'https://www.youtube.com/embed/' + embedId + '?start=' + (startTime || 0) + '&rel=0&autoplay=1&playsinline=1';
+        }
+
+        function closeVideoViewer() {
+            var overlay = document.getElementById('videoViewerOverlay');
+            if (overlay) {
+                document.getElementById('videoViewerFrame').src = '';
+                overlay.style.display = 'none';
+            }
         }
 
         function stopAllVideos() {
