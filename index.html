@@ -2099,7 +2099,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '36';
+        var APP_VERSION = '37';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -5350,13 +5350,17 @@
         }
 
         // Domains that show all profiles with inaccessible ones greyed out
-        const showLockedDomains = ['chevron.com'];
+        const showLockedDomains = ['chevron.com', 'exxonmobil.com', 'citi.com'];
 
         // Check if current user should see greyed-out cards
         function shouldShowLockedCards() {
             if (!currentUser) return false;
             var domain = getEmailDomain(currentUser);
-            return showLockedDomains.includes(domain);
+            if (showLockedDomains.includes(domain)) return true;
+            // Also show locked cards for object-based access (positions/country filters)
+            var access = accessControl[domain];
+            if (access && typeof access === 'object' && !Array.isArray(access)) return true;
+            return false;
         }
 
         // Render leaders grid
