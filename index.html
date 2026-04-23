@@ -2099,7 +2099,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '37';
+        var APP_VERSION = '38';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -2298,7 +2298,6 @@
                             <option value="matlanyane">Retšelisitsoe Matlanyane</option>
                             <option value="albino">Roberto Mito Albino</option>
                             <option value="ndabamenye">Telesphore Ndabamenye</option>
-                            <option value="edun">Wale Edun</option>
                             <option value="mene">Wamkele Mene</option>
                         </select>
                     </div>
@@ -3855,131 +3854,6 @@
             }
             },
             {
-            id: 'edun',
-            name: 'Wale Edun',
-            pronunciation: 'WAH-leh eh-DOON',
-            title: 'Minister of Finance and Coordinating Minister of the Economy',
-            country: 'Nigeria',
-            countryCode: 'nigeria',
-            position: 'finance-minister',
-            addressedAs: 'Honorable Minister',
-            officeSince: 'Aug 2023',
-            photo: 'images/edun.jpg',
-            summary: 'A veteran economist and reformer, Edun is steering Nigeria through painful but necessary economic reforms while seeking to attract investment.',
-            tags: ['Finance', 'Reform', 'Investment'],
-            traits: [
-            {
-            title: 'The Reformer',
-            description: 'Edun has long advocated for market-oriented reforms to Nigeria\'s economy. As minister, he has implemented subsidy removal and exchange rate unification, accepting short-term pain for long-term gain.'
-            },
-            {
-            title: 'The Steady Hand',
-            description: 'Amid economic turbulence, Edun projects calm and confidence, reassuring markets and stakeholders that the government has a coherent plan.'
-            }
-            ],
-            personalNote: 'Edun frequently references his decades of private sector experience, arguing that he understands what businesses need to invest and create jobs in Nigeria.',
-            whyTheyMatter: {
-            intro: 'As finance minister and coordinating minister of the economy, Edun is the chief architect of Nigeria\'s economic policy under President Tinubu.',
-            points: [
-            {
-            title: 'Managing Reform Fallout',
-            description: 'Subsidy removal and naira devaluation have caused inflation and hardship. Edun is implementing palliatives and social programs to cushion the impact on vulnerable Nigerians.'
-            },
-            {
-            title: 'Attracting Investment',
-            description: 'Edun is pitching Nigeria to international investors, emphasizing improved macro conditions, infrastructure plans, and the country\'s massive market.'
-            }
-            ],
-            quote: '"These reforms are difficult but essential. We are building the foundation for sustainable growth that benefits all Nigerians, not just the privileged few."'
-            },
-            meetingWithThem: {
-            intro: 'Edun brings intellectual rigor and private sector perspective to his interactions, engaging substantively while maintaining diplomatic composure.',
-            points: [
-            {
-            title: 'Fluent in Finance',
-            description: 'With his investment banking background, Edun speaks the language of international finance. He can discuss sovereign bonds, credit ratings, and capital flows with ease.'
-            },
-            {
-            title: 'Patient Explanation',
-            description: 'Edun takes time to explain Nigeria\'s reform rationale and trajectory, anticipating skepticism and addressing concerns methodically.'
-            }
-            ],
-            quote: 'Investors and partners describe Edun as credible and accessible, someone who gives straight answers even when the news is challenging.',
-            video: {
-            type: 'youtube',
-            url: 'https://youtu.be/8xQCvKSQ20U?t=96',
-            embedId: '8xQCvKSQ20U',
-            startTime: 96,
-            title: 'Edun Interview'
-            }
-            },
-            onTheirMind: [
-            {
-            title: 'Inflation Management',
-            description: 'With inflation above 30%, Edun is coordinating with the Central Bank on monetary policy while pursuing supply-side measures.',
-            date: 'Jan 2026'
-            },
-            {
-            title: 'Revenue Mobilization',
-            description: 'Improving tax collection is critical to funding government programs without excessive borrowing. Edun is pushing reforms at the Federal Inland Revenue Service.',
-            date: 'Jan 2026'
-            },
-            {
-            title: 'Oil Sector Revival',
-            description: 'Nigeria\'s oil production has declined. Edun is working to attract investment and improve security in the Niger Delta to boost output.',
-            date: 'Jan 2026'
-            },
-            {
-            title: 'International Engagement',
-            description: 'Edun has been active in multilateral forums and bilateral meetings, seeking support for Nigeria\'s reforms from the IMF, World Bank, and major economies.',
-            date: 'Jan 2026'
-            }
-            ],
-            network: {
-            intro: 'Edun\'s career spanning investment banking, government, and advisory roles has built an extensive network in Nigerian and international finance circles.',
-            details: [
-            'His long association with President Tinubu dates back to the Lagos State government, where Edun served as Commissioner for Finance and later Special Adviser.',
-            'Edun maintains strong relationships with multilateral institutions including the World Bank, IMF, and African Development Bank from years of engagement.',
-            'In the private sector, his investment banking career at firms like Citibank and his own advisory work created connections with major investors and corporate leaders.'
-            ]
-            },
-            controversies: {
-            intro: 'Edun\'s reform agenda has drawn both praise and criticism, with opponents questioning the pace and sequencing of painful measures.',
-            points: [
-            {
-            title: 'Reform Hardship',
-            description: 'Critics argue that subsidy removal and devaluation have impoverished millions while benefits remain unclear. Labor unions and civil society have organized protests.'
-            },
-            {
-            title: 'Communication Challenges',
-            description: 'Some have criticized the government\'s economic messaging as inconsistent or overly optimistic, contributing to public frustration.'
-            }
-            ],
-            quote: 'Edun has defended the reforms as necessary medicine, while acknowledging that government must do more to support those most affected.'
-            },
-            career: [
-            { title: 'Minister of Finance and Coordinating Minister of the Economy', org: 'Federal Republic of Nigeria', period: '2023 - present' },
-            { title: 'Managing Director', org: 'Chapel Hill Denham', period: '2013 - 2023' },
-            { title: 'Special Adviser to the President on Economic Matters', org: 'Federal Republic of Nigeria', period: '2011 - 2013' },
-            { title: 'Commissioner for Finance', org: 'Lagos State Government', period: '2003 - 2007' },
-            { title: 'Investment Banker', org: 'Citibank and others', period: '1980s - 2003' }
-            ],
-            bio: {
-            intro: 'Edun was born in Lagos and educated in Nigeria and the United Kingdom. His career has alternated between public service and the private sector.',
-            points: [
-            {
-            title: 'Educational Background',
-            description: 'Edun holds an MBA from the London Business School and a degree in Economics from the University of Lagos. He is a qualified chartered accountant.'
-            },
-            {
-            title: 'Private Sector Career',
-            description: 'His decades in investment banking included leadership roles at major institutions, giving him deep expertise in financial markets and corporate finance.'
-            }
-            ],
-            personal: 'Edun is married and has children. He is known for his measured demeanor and intellectual approach. He speaks English and Yoruba.'
-            }
-            },
-            {
             id: 'tinubu',
             name: 'Bola Tinubu',
             pronunciation: 'tee-NOO-boo',
@@ -5204,7 +5078,7 @@
         const accessControl = {
             // 'all' = full access, { country: 'xxx' } = all profiles for that country, array = specific leader IDs
             'kupanda.com': 'all',
-            'citi.com': ['ramaphosa', 'mene', 'yaron', 'edun', 'tokayev'],
+            'citi.com': ['ramaphosa', 'mene', 'yaron', 'tokayev'],
             'oathafrica.com': { country: 'rwanda', positions: ['agriculture-minister'] },
             'exxonmobil.com': { positions: ['mining-minister', 'petroleum-minister'] },
             'chevron.com': ['tinubu', 'azevedo']
