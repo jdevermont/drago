@@ -1,4 +1,4 @@
-const CACHE_NAME = 'drago-v42';
+const CACHE_NAME = 'drago-v43';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -7,7 +7,30 @@ const urlsToCache = [
   '/images/drago-logo.png',
   '/images/dragologo.jpg',
   '/images/worldmap.jpg',
-  '/images/profilesworldmap.jpg'
+  '/images/profilesworldmap.jpg',
+  '/images/massano.jpg',
+  '/images/Azevedo.jpeg',
+  '/images/Kenewendo.jpg',
+  '/images/gruner.jpg',
+  '/images/nathanielsen.jpg',
+  '/images/Kwatra.jpg',
+  '/images/yaron.jpg',
+  '/images/tokayev.jpg',
+  '/images/hassan-joho.png',
+  '/images/matlanyane.jpg',
+  '/images/albino.jpg',
+  '/images/alake.jpg',
+  '/images/oyedele.jpg',
+  '/images/tinubu.jpg',
+  '/images/arakwiye.jpg',
+  '/images/ingabire.jpg',
+  '/images/ndabamenye.jpg',
+  '/images/rusagara.jpg',
+  '/images/mene.jpg',
+  '/images/ramaphosa.jpg',
+  '/images/tau.jpg',
+  '/images/mavunde.jpg',
+  '/images/kabuswe.jpg'
 ];
 
 // Install service worker and cache resources
