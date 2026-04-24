@@ -2099,7 +2099,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '40';
+        var APP_VERSION = '41';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -5368,7 +5368,17 @@
             // For array-based access (like chevron, citi), show ALL leaders but lock inaccessible ones
             var showLocked = shouldShowLockedCards();
             if (filteredLeaders === null) {
-                filteredLeaders = showLocked ? leaders : getAccessibleLeaders();
+                filteredLeaders = showLocked ? leaders.slice() : getAccessibleLeaders();
+            } else {
+                filteredLeaders = filteredLeaders.slice();
+            }
+            // Sort accessible profiles first, greyed-out ones after
+            if (showLocked) {
+                filteredLeaders.sort(function(a, b) {
+                    var aAccess = isLeaderAccessible(a.id) ? 0 : 1;
+                    var bAccess = isLeaderAccessible(b.id) ? 0 : 1;
+                    return aAccess - bAccess;
+                });
             }
             const grid = document.getElementById('leadersGrid');
             grid.innerHTML = filteredLeaders.map(leader => {
