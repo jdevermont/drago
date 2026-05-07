@@ -1,4 +1,4 @@
-const CACHE_NAME = 'drago-v48';
+const CACHE_NAME = 'drago-v49';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -6,8 +6,6 @@ const urlsToCache = [
   '/manifest.json',
   '/images/drago-logo.png',
   '/images/dragologo.jpg',
-  '/images/worldmap.jpg',
-  '/images/profilesworldmap.jpg',
   '/images/massano.jpg',
   '/images/Azevedo.jpeg',
   '/images/Kenewendo.jpg',

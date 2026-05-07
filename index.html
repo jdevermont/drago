@@ -469,226 +469,6 @@
         }
 
         /* Map Modal */
-        .map-modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1001;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .map-modal-overlay.active {
-            display: flex;
-        }
-
-        .map-modal {
-            background: white;
-            border-radius: 16px;
-            width: 90%;
-            max-width: 900px;
-            max-height: 90vh;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .map-modal-header {
-            background: linear-gradient(135deg, var(--drago-teal) 0%, var(--drago-teal-dark) 100%);
-            color: white;
-            padding: 1.25rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .map-modal-title {
-            font-family: var(--font-heading);
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .map-modal-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            opacity: 0.8;
-            transition: opacity 0.2s;
-        }
-
-        .map-modal-close:hover {
-            opacity: 1;
-        }
-
-        .map-modal-content {
-            padding: 1.5rem;
-            overflow-y: auto;
-            max-height: calc(90vh - 70px);
-        }
-
-        .map-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .map-container svg {
-            width: 100%;
-            max-width: 800px;
-            height: auto;
-        }
-
-        /* Worldmap Image Styles */
-        .worldmap-container {
-            position: relative;
-            width: 100%;
-            max-width: 850px;
-            margin: 0 auto;
-        }
-
-        .worldmap-image {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 8px;
-        }
-
-        .map-markers-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .map-marker {
-            position: absolute;
-            transform: translate(-50%, -50%);
-            pointer-events: auto;
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        .map-marker-dot {
-            width: 14px;
-            height: 14px;
-            background: var(--drago-teal);
-            border: 2px solid white;
-            border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            transition: transform 0.2s ease;
-        }
-
-        .map-marker:hover .map-marker-dot {
-            transform: scale(1.3);
-            background: var(--drago-teal-dark);
-        }
-
-        .map-marker-pulse {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background: rgba(91, 123, 122, 0.3);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: pulse 2s ease-out infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: translate(-50%, -50%) scale(0.5);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(2);
-                opacity: 0;
-            }
-        }
-
-        .map-marker-label {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-top: 4px;
-            white-space: nowrap;
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--drago-teal-dark);
-            background: rgba(255,255,255,0.9);
-            padding: 2px 6px;
-            border-radius: 4px;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-            pointer-events: none;
-        }
-
-        .map-marker:hover .map-marker-label {
-            opacity: 1;
-        }
-
-        .map-country {
-            fill: #E2E8F0;
-            stroke: #CBD5E0;
-            stroke-width: 0.5;
-            transition: fill 0.3s ease;
-        }
-
-        .map-country.has-profile {
-            fill: var(--drago-teal);
-            cursor: pointer;
-        }
-
-        .map-country.has-profile:hover {
-            fill: var(--drago-teal-dark);
-        }
-
-        .map-legend {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-            padding-top: 1rem;
-            border-top: 1px solid #E2E8F0;
-        }
-
-        .map-legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: var(--drago-light-teal);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .map-legend-item:hover {
-            background: var(--drago-teal);
-            color: white;
-        }
-
-        .map-legend-dot {
-            width: 10px;
-            height: 10px;
-            background: var(--drago-teal);
-            border-radius: 50%;
-        }
-
-        .map-legend-item:hover .map-legend-dot {
-            background: white;
-        }
-
         @media (max-width: 768px) {
             .hero-top {
                 flex-direction: column;
@@ -773,30 +553,6 @@
             top: 50%;
             transform: translateY(-50%);
             color: var(--drago-text-light);
-        }
-
-        .filter-globe {
-            width: 38px;
-            height: 38px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--drago-teal);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            flex-shrink: 0;
-        }
-
-        .filter-globe:hover {
-            background: var(--drago-teal-dark);
-            transform: scale(1.05);
-        }
-
-        .filter-globe svg {
-            width: 22px;
-            height: 22px;
-            color: white;
         }
 
         /* Leaders Grid */
@@ -1583,7 +1339,6 @@
         /* --- Hide browser-only elements --- */
         html.standalone .directory-view > .hero,
         html.standalone .filter-group,
-        html.standalone .filter-globe,
         html.standalone .header-nav {
             display: none !important;
         }
@@ -2099,7 +1854,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '48';
+        var APP_VERSION = '49';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -2186,23 +1941,6 @@
     </div>
 
     <!-- Map Modal -->
-    <div class="map-modal-overlay" id="mapModal">
-        <div class="map-modal">
-            <div class="map-modal-header">
-                <span class="map-modal-title">DRAGO Global Coverage</span>
-                <button class="map-modal-close" onclick="closeMapModal()">&times;</button>
-            </div>
-            <div class="map-modal-content">
-                <div class="map-container" id="mapContainer">
-                    <!-- SVG map will be inserted here -->
-                </div>
-                <div class="map-legend" id="mapLegend">
-                    <!-- Legend items will be inserted here -->
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Main Application -->
     <div class="app" id="app">
         <!-- Header -->
@@ -2327,15 +2065,6 @@
                             <div style="position: relative; flex: 1;">
                                 <span class="search-icon">🔍</span>
                                 <input type="text" class="search-input" placeholder="Search by name, title, or keyword..." id="searchInput" oninput="filterLeaders()">
-                            </div>
-                            <div class="filter-globe" onclick="openMapModal()" title="View global coverage">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <ellipse cx="12" cy="12" rx="4" ry="10"/>
-                                    <path d="M2 12h20"/>
-                                    <path d="M12 2c2.5 2.5 4 5.5 4 10s-1.5 7.5-4 10"/>
-                                    <path d="M12 2c-2.5 2.5-4 5.5-4 10s1.5 7.5 4 10"/>
-                                </svg>
                             </div>
                         </div>
                     </div>
@@ -6325,130 +6054,6 @@
         });
 
         // Map Modal Functions
-        function openMapModal() {
-            document.getElementById('mapModal').classList.add('active');
-            renderMap();
-        }
-
-        function closeMapModal() {
-            document.getElementById('mapModal').classList.remove('active');
-        }
-
-        // Close map modal when clicking outside
-        document.getElementById('mapModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeMapModal();
-            }
-        });
-
-        function renderMap() {
-            // Get unique countries from accessible leaders
-            const accessibleLeaders = getAccessibleLeaders();
-            const countriesWithProfiles = {};
-
-            accessibleLeaders.forEach(leader => {
-                const countryCode = leader.countryCode;
-                if (!countriesWithProfiles[countryCode]) {
-                    countriesWithProfiles[countryCode] = {
-                        name: leader.country,
-                        leaders: []
-                    };
-                }
-                countriesWithProfiles[countryCode].leaders.push(leader);
-            });
-
-            // Map our country codes to ISO country codes
-            const countryCodeMap = {
-                'angola': 'AO',
-                'germany': 'DE',
-                'israel': 'IL',
-                'kazakhstan': 'KZ',
-                'lesotho': 'LS',
-                'mozambique': 'MZ',
-                'nigeria': 'NG',
-                'kenya': 'KE',
-                'rwanda': 'RW',
-                'south-africa': 'ZA',
-                'botswana': 'BW',
-                'greenland': 'GL',
-                'tanzania': 'TZ',
-                'zambia': 'ZM'
-            };
-
-            // Render the worldmap.jpg with markers
-            renderEmbeddedMap(countriesWithProfiles, countryCodeMap);
-
-            // Render legend immediately
-            let legendHtml = '';
-            Object.keys(countriesWithProfiles).sort((a, b) =>
-                countriesWithProfiles[a].name.localeCompare(countriesWithProfiles[b].name)
-            ).forEach(code => {
-                const country = countriesWithProfiles[code];
-                const leaderCount = country.leaders.length;
-                legendHtml += `
-                    <div class="map-legend-item" onclick="filterByCountry('${code}')">
-                        <span class="map-legend-dot"></span>
-                        <span>${country.name} (${leaderCount})</span>
-                    </div>
-                `;
-            });
-
-            document.getElementById('mapLegend').innerHTML = legendHtml;
-        }
-
-        function renderEmbeddedMap(countriesWithProfiles, countryCodeMap) {
-            // Use the worldmap.jpg image with clickable hotspot markers
-            // Coordinates calibrated from user-provided reference map
-
-            const countryMarkers = [
-                { code: 'greenland', name: 'Greenland', x: 42, y: 5, hasProfile: countriesWithProfiles['greenland'] },
-                { code: 'germany', name: 'Germany', x: 51, y: 18, hasProfile: countriesWithProfiles['germany'] },
-                { code: 'israel', name: 'Israel', x: 56, y: 32, hasProfile: countriesWithProfiles['israel'] },
-                { code: 'kazakhstan', name: 'Kazakhstan', x: 63, y: 20, hasProfile: countriesWithProfiles['kazakhstan'] },
-                { code: 'nigeria', name: 'Nigeria', x: 49, y: 45, hasProfile: countriesWithProfiles['nigeria'] },
-                { code: 'rwanda', name: 'Rwanda', x: 55, y: 50, hasProfile: countriesWithProfiles['rwanda'] },
-                { code: 'kenya', name: 'Kenya', x: 58, y: 50, hasProfile: countriesWithProfiles['kenya'] },
-                { code: 'angola', name: 'Angola', x: 51, y: 56, hasProfile: countriesWithProfiles['angola'] },
-                { code: 'botswana', name: 'Botswana', x: 54, y: 63, hasProfile: countriesWithProfiles['botswana'] },
-                { code: 'mozambique', name: 'Mozambique', x: 57, y: 58, hasProfile: countriesWithProfiles['mozambique'] },
-                { code: 'tanzania', name: 'Tanzania', x: 57, y: 52, hasProfile: countriesWithProfiles['tanzania'] },
-                { code: 'zambia', name: 'Zambia', x: 55, y: 57, hasProfile: countriesWithProfiles['zambia'] },
-                { code: 'south-africa', name: 'South Africa', x: 54, y: 68, hasProfile: countriesWithProfiles['south-africa'] },
-                { code: 'lesotho', name: 'Lesotho', x: 55, y: 66, hasProfile: countriesWithProfiles['lesotho'] },
-                { code: 'india', name: 'India', x: 64, y: 38, hasProfile: countriesWithProfiles['india'] }
-            ];
-
-            const markersHtml = countryMarkers
-                .filter(m => m.hasProfile)
-                .map(marker => `
-                    <div class="map-marker"
-                         style="left: ${marker.x}%; top: ${marker.y}%;"
-                         onclick="filterByCountry('${marker.code}')"
-                         title="${marker.name} - Click to view profiles">
-                        <div class="map-marker-pulse"></div>
-                        <div class="map-marker-dot"></div>
-                        <span class="map-marker-label">${marker.name}</span>
-                    </div>
-                `).join('');
-
-            const mapHtml = `
-                <div class="worldmap-container">
-                    <img src="images/worldmap.jpg" alt="World Map" class="worldmap-image" />
-                    <div class="map-markers-overlay">
-                        ${markersHtml}
-                    </div>
-                </div>
-            `;
-
-            document.getElementById('mapContainer').innerHTML = mapHtml;
-        }
-
-        function filterByCountry(countryCode) {
-            closeMapModal();
-            document.getElementById('countryFilter').value = countryCode;
-            filterLeaders();
-        }
-
         function followUpdates(leaderId) {
             const leader = leaders.find(l => l.id === leaderId);
             if (!leader) return;
