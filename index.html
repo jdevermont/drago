@@ -1854,7 +1854,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '50';
+        var APP_VERSION = '51';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -4937,7 +4937,8 @@
             'oathafrica.com': { country: 'rwanda', positions: ['agriculture-minister'] },
             'exxonmobil.com': { positions: ['mining-minister', 'petroleum-minister'] },
             'chevron.com': ['tinubu', 'azevedo'],
-            'dfc.gov': ['oyedele', 'nathanielsen']
+            'dfc.gov': ['oyedele', 'nathanielsen'],
+            'fcdo.gov.uk': ['kenewendo', 'oyedele', 'mene', 'tau']
         };
 
         let currentUser = null;
@@ -5080,7 +5081,7 @@
         }
 
         // Domains that show all profiles with inaccessible ones greyed out
-        const showLockedDomains = ['chevron.com', 'exxonmobil.com', 'citi.com', 'dfc.gov'];
+        const showLockedDomains = ['chevron.com', 'exxonmobil.com', 'citi.com', 'dfc.gov', 'fcdo.gov.uk'];
 
         // Check if current user should see greyed-out cards
         function shouldShowLockedCards() {
@@ -5826,7 +5827,7 @@
         function downloadPDF(leaderId) {
             sessionTracker.logPdfDownload(leaderId);
             const domain = getEmailDomain(currentUser);
-            const domainKey = domain.replace('.com', '').replace('.org', '').replace('.net', '').replace('.gov', '');
+            const domainKey = domain.replace('.gov.uk', '').replace('.com', '').replace('.org', '').replace('.net', '').replace('.gov', '');
 
             // Build list of PDF candidates: versioned (highest first), then base
             // Pattern: drago-{id}-{type}-3.pdf, -2.pdf, -1.pdf, then drago-{id}-{type}.pdf
