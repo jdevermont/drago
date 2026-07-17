@@ -1854,7 +1854,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '52';
+        var APP_VERSION = '53';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -5656,17 +5656,9 @@
 
         function loadAlerts() {
             try {
-                // One-time clear of cached alerts (v51)
-                if (!localStorage.getItem('alertsCleared_v51')) {
-                    localStorage.removeItem('dragoAlerts');
-                    localStorage.setItem('alertsCleared_v51', '1');
-                }
-                const saved = localStorage.getItem('dragoAlerts');
-                if (saved) {
-                    alertsData = JSON.parse(saved);
-                } else {
-                    alertsData = [];
-                }
+                // Force clear all cached alerts (v52)
+                localStorage.removeItem('dragoAlerts');
+                alertsData = [];
                 // Merge in default alerts — update existing or add new
                 defaultAlerts.forEach(da => {
                     const existing = alertsData.findIndex(a => a.id === da.id);
