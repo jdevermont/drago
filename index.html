@@ -1854,7 +1854,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '55';
+        var APP_VERSION = '56';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -2346,14 +2346,22 @@
             ]
             },
             career: [
-            { title: 'Minister of Mineral Resources, Petroleum, and Gas', org: 'Republic of Angola', period: '2017 - present' }
+            { title: 'Minister of Mineral Resources, Petroleum, and Gas', org: 'Republic of Angola', period: '2017 - present' },
+            { title: 'Chairman of the Board of Directors', org: 'FERRANGOL', period: '2006 - 2017' },
+            { title: 'Managing Director', org: 'South and East African Mining Center (SEAMIC)', period: '2002 - 2006' },
+            { title: 'National Director of International Relations', org: 'Ministry of Geology and Mines', period: '1997 - 2002' },
+            { title: 'Professor', org: 'Agostinho Neto University', period: '1998 - 2017' }
             ],
             bio: {
-            intro: 'Diamantino Pedro Azevedo is a technocrat with a strong background in mining engineering who has led Angola\'s mineral resources and petroleum ministry since 2017.',
+            intro: 'Azevedo, who grew up during Angola\'s struggle for independence and the early years of civil war, was among the first students at the National Institute of Petroleum. Born on July 12, 1963, his home province of Cuanza Sul was badly affected during the war, with UNITA opening its central front there. He was 12 when the war started and 39 when it ended.',
             points: [
             {
-            title: 'Mining Engineer',
-            description: 'Azevedo\'s technical background in mining engineering underpins his approach to energy policy, favoring data-driven decisions and hands-on oversight of the petroleum and mining sectors.'
+            title: 'Engineering Background',
+            description: 'Azevedo studied Geology at Agostinho Neto University. He holds a master\'s degree in mining engineering from the Freiberg Mining Academy in Germany (1991) and a PhD in Mining Engineering from the Technical University of Berlin (1997).'
+            },
+            {
+            title: 'German Influence',
+            description: 'His time in Germany almost certainly shaped his technical approach and global outlook. He has authored and contributed to several articles and reports related to Angola\'s energy and mining sectors.'
             }
             ],
             personal: 'Married with two children, Azevedo keeps his family life private. He speaks Portuguese, English, and German fluently.'
