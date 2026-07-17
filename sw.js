@@ -1,4 +1,4 @@
-const CACHE_NAME = 'drago-v53';
+const CACHE_NAME = 'drago-v54';
 const urlsToCache = [
   '/',
   '/index.html',

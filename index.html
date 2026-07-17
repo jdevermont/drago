@@ -1854,7 +1854,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '53';
+        var APP_VERSION = '54';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -5656,9 +5656,12 @@
 
         function loadAlerts() {
             try {
-                // Force clear all cached alerts (v52)
-                localStorage.removeItem('dragoAlerts');
-                alertsData = [];
+                const saved = localStorage.getItem('dragoAlerts');
+                if (saved) {
+                    alertsData = JSON.parse(saved);
+                } else {
+                    alertsData = [];
+                }
                 // Merge in default alerts — update existing or add new
                 defaultAlerts.forEach(da => {
                     const existing = alertsData.findIndex(a => a.id === da.id);
@@ -5678,11 +5681,22 @@
             fetch('alerts.json?_=' + Date.now(), { cache: 'no-store' })
                 .then(function(r) { return r.json(); })
                 .then(function(serverAlerts) {
-                    if (!Array.isArray(serverAlerts) || serverAlerts.length === 0) return;
+                    if (!Array.isArray(serverAlerts)) return;
+                    // If server has no alerts, clear everything
+                    if (serverAlerts.length === 0) {
+                        alertsData = [];
+                        saveAlerts();
+                        renderAlerts();
+                        updateAlertCounts();
+                        return;
+                    }
+                    // Remove local alerts not on server anymore
+                    var serverIds = serverAlerts.map(function(sa) { return sa.id; });
+                    alertsData = alertsData.filter(function(a) { return serverIds.includes(a.id); });
+                    // Merge server alerts: update existing, add new
                     serverAlerts.forEach(function(sa) {
                         var existing = alertsData.findIndex(function(a) { return a.id === sa.id; });
                         if (existing >= 0) {
-                            // Keep user's read state
                             var wasRead = alertsData[existing].read;
                             alertsData[existing] = Object.assign({}, sa, { read: wasRead });
                         } else {
