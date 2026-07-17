@@ -606,14 +606,13 @@
         .leader-card.locked {
             opacity: 0.4;
             filter: grayscale(100%);
-            cursor: default;
-            pointer-events: none;
+            cursor: pointer;
             position: relative;
         }
 
         .leader-card.locked:hover {
-            transform: none;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            opacity: 0.55;
+            filter: grayscale(80%);
         }
 
         .card-header {
@@ -692,6 +691,51 @@
         /* Profile Page */
         .profile-page {
             display: none;
+        }
+
+        .locked-profile-overlay {
+            position: relative;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: #666;
+        }
+
+        .locked-profile-blur {
+            filter: blur(4px);
+            opacity: 0.3;
+            user-select: none;
+            pointer-events: none;
+            max-height: 300px;
+            overflow: hidden;
+        }
+
+        .locked-profile-cta {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            text-align: center;
+            z-index: 10;
+            max-width: 420px;
+            width: 90%;
+        }
+
+        .locked-profile-cta h3 {
+            font-family: var(--font-heading);
+            color: var(--drago-teal-dark);
+            margin: 0 0 0.75rem 0;
+            font-size: 1.2rem;
+        }
+
+        .locked-profile-cta p {
+            color: #555;
+            margin: 0 0 1.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
         .profile-header {
@@ -1441,8 +1485,7 @@
         html.standalone .leader-card.locked {
             opacity: 0.35;
             filter: grayscale(100%);
-            cursor: default;
-            pointer-events: none;
+            cursor: pointer;
         }
 
         html.standalone .leader-card:hover {
@@ -1854,7 +1897,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '56';
+        var APP_VERSION = '57';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -5124,9 +5167,8 @@
             grid.innerHTML = filteredLeaders.map(leader => {
                 var accessible = isLeaderAccessible(leader.id);
                 var lockedClass = (!accessible && showLocked) ? ' locked' : '';
-                var clickHandler = (!accessible && showLocked) ? '' : `onclick="showProfile('${leader.id}')"`;
                 return `
-                <div class="leader-card${lockedClass}" ${clickHandler}>
+                <div class="leader-card${lockedClass}" onclick="showProfile('${leader.id}')">
                     <div class="card-header">
                         <img src="${leader.photo}" alt="${leader.name}" class="card-photo">
                         <div class="card-info">
@@ -5245,19 +5287,61 @@
         // Show profile
         function showProfile(leaderId) {
             stopAllVideos();
-            // Check if user has access to this leader
-            const accessibleLeaders = getAccessibleLeaders();
-            const hasAccess = accessibleLeaders.some(l => l.id === leaderId);
-            if (!hasAccess) {
-                alert('You do not have access to this profile.');
-                return;
-            }
-            // Track profile view
-            var viewedLeader = leaders.find(function(l) { return l.id === leaderId; });
-            if (viewedLeader) { sessionTracker.logProfileView(leaderId, viewedLeader.name); }
-
             const leader = leaders.find(l => l.id === leaderId);
             if (!leader) return;
+
+            // Check if user has access to this leader
+            const hasAccess = isLeaderAccessible(leaderId);
+
+            if (!hasAccess) {
+                // Show limited locked profile view
+                document.getElementById('directoryView').style.display = 'none';
+                document.getElementById('profileView').style.display = 'block';
+
+                const lockedHtml = `
+                    <div class="profile-header">
+                        <div class="profile-header-content">
+                            <div class="back-btn" onclick="showDirectory()">← Back to Directory</div>
+                        </div>
+                        <div class="profile-header-content">
+                            <img src="${leader.photo}" alt="${leader.name}" class="profile-photo">
+                            <div class="profile-info">
+                                <h1 class="profile-name">${leader.name}</h1>
+                                <div class="profile-pronunciation">(${leader.pronunciation})</div>
+                                <div class="profile-title">${leader.title}</div>
+                                <div class="profile-country">${leader.country}</div>
+                                <div class="profile-meta">
+                                    <span><strong>Addressed as:</strong> ${leader.addressedAs}</span>
+                                    <span><strong>Office held since:</strong> ${leader.officeSince}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="locked-profile-overlay">
+                        <div class="locked-profile-blur">
+                            <div class="section-heading">Summary</div>
+                            <p>${leader.summary}</p>
+                            <p>${leader.personalNote || ''}</p>
+                            <div class="section-heading">Why They Matter</div>
+                            <p>${leader.whyTheyMatter ? leader.whyTheyMatter.intro : ''}</p>
+                            <div class="section-heading">Career Highlights</div>
+                            <p>${leader.career ? leader.career.map(c => c.title + ', ' + c.org).join('. ') : ''}</p>
+                        </div>
+                        <div class="locked-profile-cta">
+                            <h3>Profile Not Included</h3>
+                            <p>This profile is not part of your current subscription. Request access to unlock the full profile and PDF.</p>
+                            <button class="btn btn-primary" onclick="requestProfile()">📋 Request This Profile</button>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('profileView').innerHTML = lockedHtml;
+                window.scrollTo(0, 0);
+                return;
+            }
+
+            // Track profile view
+            sessionTracker.logProfileView(leaderId, leader.name);
 
             document.getElementById('directoryView').style.display = 'none';
             document.getElementById('profileView').style.display = 'block';
@@ -5801,6 +5885,41 @@
             };
 
             window.speechSynthesis.speak(utterance);
+        }
+
+        function requestProfile() {
+            var now = new Date();
+            var estOptions = {
+                timeZone: 'America/New_York',
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+                hour: 'numeric', minute: '2-digit', hour12: true
+            };
+            var requestTime = now.toLocaleString('en-US', estOptions) + ' EST';
+
+            // Find which leader's locked profile is being viewed
+            var profileName = document.querySelector('.profile-name');
+            var leaderName = profileName ? profileName.textContent : 'Unknown Leader';
+
+            var ctaBtn = document.querySelector('.locked-profile-cta .btn');
+            ctaBtn.textContent = 'Sending request...';
+            ctaBtn.disabled = true;
+
+            emailjs.send('service_5poo91b', 'template_1m5ryo5', {
+                from_email: currentUser,
+                request_time: requestTime,
+                leader: leaderName,
+                position: 'New Profile Access Request',
+                due_date: 'By ' + (function() { var d = new Date(); d.setDate(d.getDate() + 2); skipToWeekday(d); return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }); })()
+            }).then(function() {
+                var d = new Date(); d.setDate(d.getDate() + 2); skipToWeekday(d);
+                var cta = document.querySelector('.locked-profile-cta');
+                cta.innerHTML = '<h3>Request Sent</h3><p>We\'ll prepare this profile for you by <strong>' + d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) + '</strong>.</p>';
+            }, function(error) {
+                ctaBtn.textContent = '📋 Request This Profile';
+                ctaBtn.disabled = false;
+                console.error('EmailJS error:', error);
+                alert('Failed to send request. Please try again.');
+            });
         }
 
         function requestProfileUpdate(leaderId, leaderName) {
