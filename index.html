@@ -1897,7 +1897,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '57';
+        var APP_VERSION = '58';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -4984,7 +4984,7 @@
         const accessControl = {
             // 'all' = full access, { country: 'xxx' } = all profiles for that country, array = specific leader IDs
             'kupanda.com': 'all',
-            'citi.com': ['ramaphosa', 'mene', 'yaron', 'tokayev', 'oyedele'],
+
             'oathafrica.com': { country: 'rwanda', positions: ['agriculture-minister'] },
             'exxonmobil.com': { positions: ['mining-minister', 'petroleum-minister'] },
             'chevron.com': ['tinubu', 'azevedo'],
@@ -5133,7 +5133,7 @@
         }
 
         // Domains that show all profiles with inaccessible ones greyed out
-        const showLockedDomains = ['chevron.com', 'exxonmobil.com', 'citi.com', 'dfc.gov', 'fcdo.gov.uk', 'mcc.gov'];
+        const showLockedDomains = ['chevron.com', 'exxonmobil.com', 'dfc.gov', 'fcdo.gov.uk', 'mcc.gov'];
 
         // Check if current user should see greyed-out cards
         function shouldShowLockedCards() {
