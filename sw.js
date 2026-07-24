@@ -1,4 +1,4 @@
-const CACHE_NAME = 'drago-v58';
+const CACHE_NAME = 'drago-v59';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -16,6 +16,7 @@ const urlsToCache = [
   '/images/tokayev.jpg',
   '/images/hassan-joho.png',
   '/images/matlanyane.jpg',
+  '/images/chapo.jpg',
   '/images/albino.jpg',
   '/images/alake.jpg',
   '/images/oyedele.jpg',
