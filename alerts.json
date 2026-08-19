@@ -20,6 +20,16 @@
     "type": "news"
   },
   {
+    "id": "chapo-sadc-migration-aug2026",
+    "leaderId": "chapo",
+    "title": "Chapo Condemns Xenophobic Violence at SADC Summit",
+    "summary": "Speaking after the 46th SADC Summit in Durban, Chapo said violence will never resolve migration-related conflicts between peoples who share the same history. He noted Ramaphosa reiterated his apology and offered condolences to bereaved families. Chapo called for strengthening SADC's role in promoting safe migration and urged Mozambicans not to retaliate. On compensation, he said it was premature to discuss while the process is ongoing.",
+    "source": "Club of Mozambique / AIM",
+    "url": "https://clubofmozambique.com/news/mozambique-violence-will-never-be-path-to-resolving-migration-related-conflicts-chapo-aim-report/",
+    "date": "2026-08-18",
+    "type": "news"
+  },
+  {
     "id": "samia-jnhpp-aug2026",
     "leaderId": "samia",
     "title": "Samia to Inaugurate $2.9B Julius Nyerere Hydropower Project",
@@ -27,6 +37,16 @@
     "source": "The Citizen",
     "url": "https://www.thecitizen.co.tz/tanzania/news/national/samia-to-inaugurate-sh7-45-trillion-julius-nyerere-hydropower-project-on-august-22-5559650",
     "date": "2026-08-16",
+    "type": "news"
+  },
+  {
+    "id": "samia-drc-tshisekedi-aug2026",
+    "leaderId": "samia",
+    "title": "Samia and Tshisekedi Deepen Security, Economic Ties",
+    "summary": "At State House in Zanzibar, Samia and DRC President Tshisekedi called for the withdrawal of foreign forces from Congolese territory and pledged deeper defence cooperation. The talks produced a Strategic Partnership on Minerals covering critical minerals and value addition, commitments to improve Central Corridor transport links through Dar es Salaam, Kigoma and Kalemie, and energy cooperation exploring synergies with EACOP and TAZAMA.",
+    "source": "ChimpReports",
+    "url": "https://chimpreports.com/tanzania-drc-call-for-withdrawal-of-foreign-forces-as-tshisekedi-samia-deepen-security-economic-ties/",
+    "date": "2026-08-18",
     "type": "news"
   }
 ]
