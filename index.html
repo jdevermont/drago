@@ -1897,7 +1897,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '65';
+        var APP_VERSION = '66';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -5364,7 +5364,6 @@
 
             'oathafrica.com': { country: 'rwanda', positions: ['agriculture-minister'] },
             'exxonmobil.com': { positions: ['mining-minister', 'petroleum-minister'], ids: ['chapo', 'samia', 'kagame'] },
-            'chevron.com': ['tinubu', 'azevedo'],
             'dfc.gov': ['oyedele', 'nathanielsen'],
             'fcdo.gov.uk': ['kenewendo', 'oyedele', 'mene', 'tau'],
             'mcc.gov': ['matlanyane', 'albino', 'mavunde']
@@ -5511,7 +5510,7 @@
         }
 
         // Domains that show all profiles with inaccessible ones greyed out
-        const showLockedDomains = ['chevron.com', 'exxonmobil.com', 'dfc.gov', 'fcdo.gov.uk', 'mcc.gov'];
+        const showLockedDomains = ['exxonmobil.com', 'dfc.gov', 'fcdo.gov.uk', 'mcc.gov'];
 
         // Check if current user should see greyed-out cards
         function shouldShowLockedCards() {
