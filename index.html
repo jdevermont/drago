@@ -1897,7 +1897,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '66';
+        var APP_VERSION = '67';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -5363,7 +5363,7 @@
             'kupanda.com': 'all',
 
             'oathafrica.com': { country: 'rwanda', positions: ['agriculture-minister'] },
-            'exxonmobil.com': { positions: ['mining-minister', 'petroleum-minister'], ids: ['chapo', 'samia', 'kagame'] },
+            'exxonmobil.com': { positions: ['mining-minister', 'petroleum-minister'], ids: ['chapo', 'samia', 'kagame', 'tinubu'] },
             'dfc.gov': ['oyedele', 'nathanielsen'],
             'fcdo.gov.uk': ['kenewendo', 'oyedele', 'mene', 'tau'],
             'mcc.gov': ['matlanyane', 'albino', 'mavunde']
