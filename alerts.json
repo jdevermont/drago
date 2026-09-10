@@ -138,5 +138,25 @@
     "url": "https://www.bbc.com/news/articles/cgqd774wzpdo",
     "date": "2026-09-07",
     "type": "news"
+  },
+  {
+    "id": "samia-90-day-leave-sep2026",
+    "leaderId": "samia",
+    "title": "Samia Takes 90-Day Leave; Ndejembi and Nchemba Assume Duties",
+    "summary": "Chief Secretary Moses Kusiluka announced that President Samia began a 90-day leave of absence from September 7 following her husband's death. Vice President Deogratius Ndejembi and Prime Minister Mwigulu Nchemba will manage executive government duties in accordance with Tanzanian law. Ndejembi became Vice President only on August 29, after Emmanuel Nchimbi's resignation. Hafidh Ameir, 76, was buried September 7 in Kizimkazi following Islamic funeral rites.",
+    "source": "The Kenya Times",
+    "url": "https://thekenyatimes.com/breaking-news/samia-suluhu-leave-office-to-mourn/",
+    "date": "2026-09-10",
+    "type": "news"
+  },
+  {
+    "id": "godongwana-fuel-price-tradeoff-sep2026",
+    "leaderId": "godongwana",
+    "title": "Godongwana: Government Cannot Insulate Consumers From Fuel Price Shock",
+    "summary": "Responding to Parliamentary Q&A, Godongwana said Treasury has little room to manoeuvre on rising fuel prices, warning that \"permanently offsetting these increases through the budget would ultimately shift the cost to taxpayers or increase government borrowing.\" The April–June fuel levy relief cost R17.2 billion in foregone revenue. Central Energy Fund data points to a R2-per-litre hike in October, pushing prices to record highs. A review of the fuel price formula is not due until March 2027.",
+    "source": "BusinessTech",
+    "url": "https://businesstech.co.za/news/government/874544/record-high-petrol-prices-or-pay-higher-taxes-godongwana-says-you-must-pick-one/",
+    "date": "2026-09-09",
+    "type": "news"
   }
 ]
