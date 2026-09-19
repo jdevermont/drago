@@ -158,5 +158,25 @@
     "url": "https://businesstech.co.za/news/government/874544/record-high-petrol-prices-or-pay-higher-taxes-godongwana-says-you-must-pick-one/",
     "date": "2026-09-09",
     "type": "news"
+  },
+  {
+    "id": "kagame-cabinet-investment-deals-sep2026",
+    "leaderId": "kagame",
+    "title": "Kagame's Cabinet Approves Investment Deals and 25-Year Cooperation Policy",
+    "summary": "Kagame chaired a September 18 Cabinet meeting approving the Rwanda Development Cooperation Policy, which will guide engagement with development partners over 2026-2050 with a focus on nationally-led partnerships. Cabinet also approved a strategic investment agreement with Chery Holding Rwanda for an electric vehicle assembly plant, a supplemental concession with DP World Logistics for Phase II of the Kigali Logistics Platform, draft laws on environment and climate change, and establishment of the Rwanda Green Fund.",
+    "source": "The New Times",
+    "url": "https://www.newtimes.co.rw/article/39070/news/economy/cabinet-approves-key-investment-deals-25-year-cooperation-policy",
+    "date": "2026-09-19",
+    "type": "news"
+  },
+  {
+    "id": "chapo-imf-mission-sep2026",
+    "leaderId": "chapo",
+    "title": "Mozambique Says IMF Mission May Open Way for New Loan Programme",
+    "summary": "Mozambique's finance ministry said it hoped an IMF mission that ended September 18 would pave the way for a new support programme, though the Fund signalled more reforms may be needed first and said talks would continue in the coming months. The mission, led by Pablo Lopez-Murphy, met Prime Minister Maria Benvinda Levi, Finance Minister Carla Loveira and new Central Bank Governor Felisberto Navalha. A follow-up mission is possible in November. The IMF called economic activity \"subdued but showing signs of recovery\"; the debt burden remains deemed unsustainable.",
+    "source": "Reuters",
+    "url": "https://www.reuters.com/world/africa/mozambique-hopes-imf-visit-paves-way-new-loan-programme-2026-09-18/",
+    "date": "2026-09-18",
+    "type": "news"
   }
 ]
