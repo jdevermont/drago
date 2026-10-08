@@ -1897,7 +1897,7 @@
 
     // Auto-update: check server version and force reload if outdated
     (function() {
-        var APP_VERSION = '75';
+        var APP_VERSION = '76';
         fetch('version.json?_=' + Date.now(), { cache: 'no-store' })
             .then(function(r) { return r.json(); })
             .then(function(data) {
@@ -3810,7 +3810,13 @@
             description: 'Musa prefers to complicate, not simplify, the problem. He zooms out, reminding counterparts that extremism is "difficult to eradicate. Why? Because the center of gravity is not an individual… [it] is his ideology, and his ideology is in his mind."'
             }
             ],
-            quote: 'Musa adjusts his tone to his counterpart. He was brotherly with Beninese officers in Cotonou and transactional with Chinese defense executives in Beijing. He often invokes his Christian faith, vents about slow courts that free captured kidnappers, and argues that military force is only 30 percent of the security equation.'
+            quote: 'Musa adjusts his tone to his counterpart. He was brotherly with Beninese officers in Cotonou and transactional with Chinese defense executives in Beijing. He often invokes his Christian faith, vents about slow courts that free captured kidnappers, and argues that military force is only 30 percent of the security equation.',
+            video: {
+            type: 'youtube',
+            embedId: 'Slz-RiGWcA4',
+            startTime: 123,
+            title: 'Musa Interview'
+            }
             },
             onTheirMind: [
             {
