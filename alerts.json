@@ -258,5 +258,15 @@
     "url": "https://clubofmozambique.com/news/mozambique-chapo-to-visit-russia-with-meeting-with-putin-on-the-agenda/",
     "date": "2026-10-26",
     "type": "news"
+  },
+  {
+    "id": "samia-gas-discovery-oct2026",
+    "leaderId": "samia",
+    "title": "Tanzania Announces First Gas Discovery in More Than a Decade",
+    "summary": "Energy Minister Juma Homera announced an estimated 223 billion cubic feet of natural gas discovered at the Kasa-1X ST2 well in the Mnazi Bay area of southern Tanzania, the country's first gas find in more than 10 years. The well is one of three, along with MB-5 and MS-2, drilled by the state-owned Tanzania Petroleum Development Corporation (TPDC) and French oil company Maurel & Prom to boost gas supply. Maurel & Prom says first production could begin as early as next month, and TPDC is in talks with four investors planning small-scale LNG projects. Before the announcement, Tanzania's energy regulator put the country's gas reserves at about 57.5 trillion standard cubic feet.",
+    "source": "Reuters",
+    "url": "https://www.reuters.com/business/energy/tanzania-announces-first-gas-discovery-more-than-10-years-2026-10-27/",
+    "date": "2026-10-27",
+    "type": "news"
   }
 ]
