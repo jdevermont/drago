@@ -1,4 +1,4 @@
-const CACHE_NAME = 'drago-v81';
+const CACHE_NAME = 'drago-v82';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -34,8 +34,7 @@ const urlsToCache = [
   '/images/Ramokgopa.jpg',
   '/images/tau.jpg',
   '/images/samia.jpg',
-  '/images/mavunde.jpg',
-  '/images/kabuswe.jpg'
+  '/images/mavunde.jpg'
 ];
 
 // Install service worker and cache resources
